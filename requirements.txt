@@ -1,0 +1,5 @@
+# Editable Git install with no remote (HabitTracker==0.1.0)
+-e /home/greeze/HabitTracker
+PyQt6==6.9.1
+PyQt6-Qt6==6.9.1
+PyQt6_sip==13.10.2

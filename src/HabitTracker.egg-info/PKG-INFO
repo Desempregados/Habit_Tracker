@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: HabitTracker
+Version: 0.1.0
+Summary: Habit Tracker prototype
+Author: Arthur Castro
+Author-email: Allan Kennedy <seu-email@exemplo.com>
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pyqt6
