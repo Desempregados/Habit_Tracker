@@ -16,7 +16,7 @@ dist/
 *.db
 *.sqlite
 *.sqlite3
-*.db-journal # Ficheiro temporário do SQLite
+*.db-journal
 
 .env
 *.local
