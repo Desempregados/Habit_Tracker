@@ -21,17 +21,19 @@ class Greeting(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setStyleSheet(f"""
-        #Greeting {{
+        self.setStyleSheet(
+            """
+        #Greeting {
         background-color :rgb(30, 30, 30);
-        }}
-        #Greeting QLabel{{
+        }
+        #Greeting QLabel{
         font-size:140px;
         color:rgb(0,255,159);
         font-family:Hack;
         font-weight:bold;
-        }}
-        """)
+        }
+        """
+        )
 
 
 def main():

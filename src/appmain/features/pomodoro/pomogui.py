@@ -1,30 +1,55 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit, QMainWindow, QMessageBox, QDialog, QGraphicsDropShadowEffect
-from PyQt6.QtCore import Qt 
-from PyQt6.QtGui import QColor
+from PyQt6.QtWidgets import (
+    QApplication,
+    QWidget,
+    QLabel,
+    QPushButton,
+    QVBoxLayout,
+    QHBoxLayout,
+    QMessageBox,
+    QDialog,
+)
+from PyQt6.QtCore import Qt
 from appmain.common.shadows import AppShadows
 from appmain.features.pomodoro.pomothread import Perfil_pomodoro
 from appmain.features.pomodoro.configwindow import ConfigWindow
 from appmain.common.animations import AnimationsPulse
+from appmain.database.database import *
 from appmain import assets
 
 
-class Janela(QWidget):
-    def __init__(self):
-
+class PomodoroUI(QWidget):
+    def __init__(self, parent=None):
         # =============== Boilerplate ========================
 
-        super().__init__()
+        super().__init__(parent)
         self.layout_principal = QVBoxLayout(self)
         self.p1 = Perfil_pomodoro()
         self.setObjectName("Pomodoro")
 
+        # ================= Button back ====================
+
+        self.layout_button_back = QHBoxLayout()
+        self.layout_principal.addLayout(self.layout_button_back)
+
+        self.button_back = QPushButton("")
+        self.layout_button_back.addWidget(self.button_back)
+        self.layout_button_back.addStretch(1)
+
+        # ================= Label skill name ===============
+
+        self.label_skill_name = QLabel("Skill Name")
+        self.layout_principal.addWidget(self.label_skill_name)
+        self.label_skill_name.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_skill_name.setStyleSheet(
+            "font-size:30px; font-weight:bold; color:white;"
+        )
+
         # ================= time label =====================
 
-        self.shadow1 = AppShadows((0, 255, 159), 15)
+        self.shadow1 = AppShadows((0, 255, 159), 35)
 
-        self.label_tempo = QLabel(f"{self.p1.form_time(self.p1.left_time)}",
-                                  self)
+        self.label_tempo = QLabel(f"{self.p1.form_time(self.p1.left_time)}", self)
 
         self.label_tempo.setGraphicsEffect(self.shadow1)
         self.layout_principal.addStretch(1)
@@ -33,6 +58,8 @@ class Janela(QWidget):
         # ================= Cycle Stage label ==============
 
         self.label_cycle_stage = QLabel(f"{self.p1.current_cycle}")
+        self.shadow2 = AppShadows((0, 255, 159), 35)
+        self.label_cycle_stage.setGraphicsEffect(self.shadow2)
         self.layout_principal.addWidget(self.label_cycle_stage)
 
         # ============= buttons (play, restart, skip)=======
@@ -86,8 +113,7 @@ class Janela(QWidget):
         self.warning_end_cycle.setText("De volta ao trabalho")
         self.warning_end_cycle.setIcon(QMessageBox.Icon.Information)
 
-        self.warning_end_cycle.setStandardButtons(
-            QMessageBox.StandardButton.Ok)
+        self.warning_end_cycle.setStandardButtons(QMessageBox.StandardButton.Ok)
 
         self.warning_end_cycle.setFixedSize(1000, 1000)
 
@@ -96,30 +122,34 @@ class Janela(QWidget):
         self.setUI()
         self.pomo_connect()
 
-# ========================= CSS Function ===================================
+    # ========================= CSS Function ===================================
 
     def setUI(self):
-
         # ---------- time label ----------------
 
-        self.label_tempo.setStyleSheet("font-size:238px; font-weight:bold; color: white;")
+        self.label_tempo.setStyleSheet(
+            "font-size:238px; font-weight:bold; color: white;"
+        )
         self.label_tempo.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # ---------- cycle stage label ---------
 
-        self.label_cycle_stage.setStyleSheet("""
+        self.label_cycle_stage.setStyleSheet(
+            """
        #Pomodoro QLabel{
         font-size: 90px ;
         font-weight: bold;
         font-family: Hack;
         color: rgba(0,255,159,0.8);
         }
-        """)
+        """
+        )
         self.label_cycle_stage.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # ---------- buttons css ---------------
 
-        self.setStyleSheet(f"""
+        self.setStyleSheet(
+            f"""
         #Pomodoro {{
         background-color:rgba(30,30,30,1);
         }}
@@ -151,11 +181,12 @@ class Janela(QWidget):
         font-size:30px;
         }}
         """
-                           )
+        )
 
         # ------------- Current cycle label ------------
 
-        self.label_current_cycle.setStyleSheet("""
+        self.label_current_cycle.setStyleSheet(
+            """
        #Pomodoro QLabel{
             font-weight:bold;
             font-size:70px;
@@ -165,18 +196,21 @@ class Janela(QWidget):
             background-color:rgba(190,130,255, 0.2);
             padding:6px;
         }
-        """)
+        """
+        )
         self.label_current_cycle.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # ----------- Message Box ------------------------
 
-        self.warning_end_cycle.setStyleSheet("""
+        self.warning_end_cycle.setStyleSheet(
+            """
                                              QMessageBox{
                                              background-color:rgba(20,20,20,1);
                                              }
                                              QMessageBox QLabel {
                                              font-size:24px;
                                              font-weight:bold;
+                                             color:white;
                                              }
                                              QMessageBox QPushButton{
                                              font-size:20px;
@@ -188,9 +222,10 @@ class Janela(QWidget):
                                              QDialogButtonBox{
                                              qproperty-centerButtons: true;
                                              }
-                                             """)
+                                             """
+        )
 
-# ============ Connections ============================
+    # ============ Connections ============================
 
     def pomo_connect(self):
         self.button_play.clicked.connect(self.click_start)
@@ -201,7 +236,7 @@ class Janela(QWidget):
         self.p1.sinal_parar_tempo.connect(self.end_cycle)
         self.p1.sinal_current_cycle.connect(self.label_current_cycle.setText)
 
-# ============= Start Button ==========================
+    # ============= Start Button ==========================
 
     def click_start(self):
         self.animation_pulse_button(self.button_play)
@@ -213,7 +248,7 @@ class Janela(QWidget):
             self.p1.pomo_pause()
             self.button_play.setText("Start")
 
-# ============== Restart Button actions =======================
+    # ============== Restart Button actions =======================
 
     def click_restart(self):
         self.animation_pulse_button(self.button_reset)
@@ -223,7 +258,7 @@ class Janela(QWidget):
         self.p1.pomo_restart()
         self.label_tempo.setText(f"{self.p1.form_time(self.p1.left_time)}")
 
-# =============== Skip Button actions =============================
+    # =============== Skip Button actions =============================
 
     def click_skip(self):
         self.animation_pulse_button(self.button_skip)
@@ -232,7 +267,7 @@ class Janela(QWidget):
         self.label_cycle_stage.setText(self.p1.current_cycle)
         self.button_play.setText("Start")
 
-# =============== End cycle function ===================
+    # =============== End cycle function ===================
 
     def end_cycle(self):
         self.button_play.setText("Start")
@@ -250,7 +285,7 @@ class Janela(QWidget):
             self.warning_end_cycle.setText("Get back to work!!")
             self.warning_end_cycle.exec()
 
-# =============== Settings option =========================
+    # =============== Settings option =========================
 
     def open_settings(self):
         self.animation_pulse_button(self.button_settings, (40, 20), 150)
@@ -260,21 +295,36 @@ class Janela(QWidget):
 
         if result == QDialog.DialogCode.Accepted:
             settings = self.window_settings.get_settings()
-            self.p1.pomo_profile_change(settings["work"], settings["short_break"], settings["long_break"], settings["cylcles_number"])
+            self.p1.pomo_profile_change(
+                settings["work"],
+                settings["short_break"],
+                settings["long_break"],
+                settings["cylcles_number"],
+            )
             self.click_restart()
-            self.label_current_cycle.setText(f"{(self.p1.completed_cycles -1) % self.p1.len_cycle}/{self.p1.len_cycle}")
+            self.label_current_cycle.setText(
+                f"{(self.p1.completed_cycles - 1) % self.p1.len_cycle}/{self.p1.len_cycle}"
+            )
 
-    def animation_pulse_button(self, button: QPushButton, delta: tuple[int, int] = (30, 15), duration: int = 30):
+    def animation_pulse_button(
+        self, button: QPushButton, delta: tuple[int, int] = (30, 15), duration: int = 30
+    ):
         self.animation_button = AnimationsPulse(button, delta, duration)
         button.setEnabled(False)
         self.animation_button.start()
         self.animation_button.finished.connect(lambda: button.setEnabled(True))
 
+    def set_text_skill_name(self, id: int):
+        skill_name = db_obtain_skill_by_id(id)
+        self.label_skill_name.setText(skill_name)
+
+
 # ============== Boilerplate ==============================
+
 
 def main():
     app = QApplication(sys.argv)
-    window = Janela()
+    window = PomodoroUI()
     window.show()
     sys.exit(app.exec())
 

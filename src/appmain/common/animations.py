@@ -1,11 +1,23 @@
-
-from PyQt6.QtCore import QEasingCurve, QPropertyAnimation, QPoint , QParallelAnimationGroup, QSize, QAbstractAnimation, QSequentialAnimationGroup
+from PyQt6.QtCore import (
+    QEasingCurve,
+    QPropertyAnimation,
+    QPoint,
+    QParallelAnimationGroup,
+    QSize,
+    QSequentialAnimationGroup,
+)
 import sys
 from PyQt6.QtWidgets import QWidget, QPushButton, QVBoxLayout, QApplication, QHBoxLayout
 
 
 class AnimationsPos(QPropertyAnimation):
-    def __init__(self, widget: QWidget, delta: tuple[int , int] = (0, -50), duration: int = 1000, parent = None):
+    def __init__(
+        self,
+        widget: QWidget,
+        delta: tuple[int, int] = (0, -50),
+        duration: int = 1000,
+        parent=None,
+    ):
         super().__init__(widget, b"pos", parent)
 
         self.delta_pos = QPoint(delta[0], delta[1])
@@ -15,7 +27,13 @@ class AnimationsPos(QPropertyAnimation):
 
 
 class AnimationsSize(QParallelAnimationGroup):
-    def __init__(self, widget: QWidget, delta: tuple[int, int] = (20, 10), duration:int = 1000, parent = None):
+    def __init__(
+        self,
+        widget: QWidget,
+        delta: tuple[int, int] = (20, 10),
+        duration: int = 1000,
+        parent=None,
+    ):
         super().__init__(parent)
 
         self.delta_size = QSize(delta[0], delta[1])
@@ -26,7 +44,9 @@ class AnimationsSize(QParallelAnimationGroup):
 
         self.og_pos = widget.pos()
 
-        self.new_pos = self.og_pos - QPoint(self.delta_size.width() // 2, self.delta_size.height() // 2)
+        self.new_pos = self.og_pos - QPoint(
+            self.delta_size.width() // 2, self.delta_size.height() // 2
+        )
 
         self.animation_pos = QPropertyAnimation(widget, b"pos", parent)
         self.animation_pos.setDuration(duration)
@@ -38,7 +58,13 @@ class AnimationsSize(QParallelAnimationGroup):
 
 
 class AnimationsPulse(QSequentialAnimationGroup):
-    def __init__(self, widget, delta: tuple[int, int] = (50, 50), duration: int = 200, parent=None):
+    def __init__(
+        self,
+        widget,
+        delta: tuple[int, int] = (50, 50),
+        duration: int = 200,
+        parent=None,
+    ):
         super().__init__(parent)
 
         self.first_part = AnimationsSize(widget, (delta[0], delta[1]), duration)
@@ -49,7 +75,6 @@ class AnimationsPulse(QSequentialAnimationGroup):
 
 
 class AppTeste(QWidget):
-
     def __init__(self):
         super().__init__()
         self.button_test = QPushButton("Test")
@@ -60,7 +85,8 @@ class AppTeste(QWidget):
         self.layout_button.addWidget(self.button_test)
         self.layout_button.addStretch(1)
         self.layout_test.addLayout(self.layout_button)
-        self.button_test.setStyleSheet("""
+        self.button_test.setStyleSheet(
+            """
         QPushButton{
         font-size: 26px;
         font-weight: bold;
@@ -77,7 +103,8 @@ class AppTeste(QWidget):
         QPushButton:pressed{
         background-color:rgb(190,190,190);
         }
-        """)
+        """
+        )
         self.button_test.clicked.connect(self.click_animation)
 
     def click_animation(self):
@@ -88,6 +115,7 @@ class AppTeste(QWidget):
 
     def enable_button(self):
         self.button_test.setEnabled(True)
+
 
 def main():
     app = QApplication(sys.argv)

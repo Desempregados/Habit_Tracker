@@ -1,11 +1,16 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit, QMainWindow, QMessageBox, QDialog, QStackedWidget, QGraphicsDropShadowEffect
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QColor
+from PyQt6.QtWidgets import (
+    QApplication,
+    QWidget,
+    QPushButton,
+    QVBoxLayout,
+    QHBoxLayout,
+    QMainWindow,
+    QStackedWidget,
+)
 from appmain.common.shadows import AppShadows
 from appmain.features.pomodoro.pomogui import Janela
 from appmain.features.greeting.greeting import Greeting
-from appmain.common.animations import AnimationsPulse
 
 
 class main_app(QMainWindow):
@@ -21,6 +26,7 @@ class main_app(QMainWindow):
 
         self.shadow1 = AppShadows((0, 255, 159, 255), 45)
 
+        bosta = "allan"
         self.layout_botao_abrir = QHBoxLayout()
         self.button_back_title = QPushButton("<-")
 
@@ -52,13 +58,17 @@ class main_app(QMainWindow):
         self.button_back_title.clicked.connect(self.back_title)
 
     def initUI(self):
-        self.setStyleSheet(f"""
-        #MainWindow {{
+        self.setStyleSheet(
+            """
+        #MainWindow {
         background-color:rgb(30,30,30);
-        }}
-        """)
-        self.button_open_pomo.setStyleSheet("""
+        }
+        """
+        )
+        self.button_open_pomo.setStyleSheet(
+            """
         #MainWindow QPushButton{
+        color:white;
         font-size: 40px;
         font-family: Hack;
         font-weight:bold;
@@ -73,10 +83,13 @@ class main_app(QMainWindow):
        #MainWindow QPushButton:pressed{
         background-color:rgba(0,255,159,0.6);
         }
-        """)
+        """
+        )
 
-        self.button_back_title.setStyleSheet("""
+        self.button_back_title.setStyleSheet(
+            """
        #MainWindow QPushButton{
+        color:white;
         font-size: 20px;
         font-family: Hack;
         font-weight:bold;
@@ -93,7 +106,8 @@ class main_app(QMainWindow):
        #MainWindow QPushButton:pressed{
         background-color:rgba(0,255,159,0.6);
         }
-        """)
+        """
+        )
 
     def window_open(self):
         self.stackedwidget.setCurrentIndex(1)
@@ -104,11 +118,6 @@ class main_app(QMainWindow):
         self.stackedwidget.setCurrentIndex(0)
         self.button_open_pomo.show()
         self.button_back_title.hide()
-
-
-
-
-
 
 
 def main():

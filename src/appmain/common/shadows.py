@@ -3,9 +3,12 @@ from PyQt6.QtGui import QColor
 
 
 class AppShadows(QGraphicsDropShadowEffect):
-
-    def __init__(self, color: tuple[int, int, int, int], intensity: int,
-                 offset: tuple[int, int] = (0, 0)):
+    def __init__(
+        self,
+        color: tuple[int, int, int, int],
+        intensity: int,
+        offset: tuple[int, int] = (0, 0),
+    ):
         super().__init__()
         self.color = color
         self.intensity = intensity

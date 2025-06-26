@@ -1,12 +1,21 @@
 import sys
-from PyQt6.QtWidgets import QDialog,QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QLineEdit, QApplication, QGridLayout, QSpinBox
+from PyQt6.QtWidgets import (
+    QDialog,
+    QHBoxLayout,
+    QVBoxLayout,
+    QPushButton,
+    QLabel,
+    QApplication,
+    QGridLayout,
+    QSpinBox,
+)
 from PyQt6.QtCore import Qt
 from appmain.common.shadows import AppShadows
 from appmain import assets
 
-class ConfigWindow(QDialog):
-    def __init__(self, parent = None):
 
+class ConfigWindow(QDialog):
+    def __init__(self, parent=None):
         # ======================= boilerplate =====================
 
         super().__init__(parent)
@@ -104,9 +113,9 @@ class ConfigWindow(QDialog):
         self.setUI()
 
     def setUI(self):
-
         self.label_titulo.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.setStyleSheet(f"""
+        self.setStyleSheet(
+            f"""
         #ConfigWindow {{
         background-color:rgba(30,30,30,1);
         }}
@@ -164,13 +173,16 @@ class ConfigWindow(QDialog):
         background-color:#E03642;
         }}
 
-        """)
+        """
+        )
 
     def get_settings(self):
-        settings = {"work": self.box_work.value(),
-                         "short_break": self.box_short.value(),
-                         "long_break": self.box_long.value(),
-                         "cylcles_number": self.box_cycle.value()}
+        settings = {
+            "work": self.box_work.value(),
+            "short_break": self.box_short.value(),
+            "long_break": self.box_long.value(),
+            "cylcles_number": self.box_cycle.value(),
+        }
 
         return settings
 
