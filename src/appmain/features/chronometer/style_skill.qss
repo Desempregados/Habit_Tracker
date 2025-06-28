@@ -1,0 +1,67 @@
+#ChronometerUI {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#ChronometerUI QPushButton {
+	background-color: transparent;
+	border: none;
+	padding: 10px;
+}
+
+#ChronometerUI QPushButton#button_back {
+	color: rgba(0, 255, 159, 1);
+	font-size: 40px;
+}
+
+#ChronometerUI QPushButton#button_back:pressed {
+	color: rgba(0, 255, 159, 0.8);
+	font-size: 40px;
+}
+
+#ChronometerUI QLabel#label_skill_name {
+	color: rgba(0, 255, 159, 1);
+	font-weight: bold;
+	font-family: Hack;
+	font-size: 40px;
+}
+
+#ChronometerUI QLabel#label_time {
+	color: white;
+	font-weight: bold;
+	font-size: 250px;
+}
+
+#ChronometerUI QPushButton#button_restart {
+	color: rgba(200, 130, 255, 1);
+	font-size: 100px;
+}
+
+#ChronometerUI QPushButton#button_restart:pressed {
+	color: rgba(200, 130, 255, 0.8);
+}
+
+#ChronometerUI QPushButton#button_restart:disabled {
+	color: rgba(200, 130, 255, 0.4);
+}
+
+#ChronometerUI QPushButton#button_start {
+	color: rgba(200, 130, 255, 1);
+	font-size: 100px;
+}
+
+#ChronometerUI QPushButton#button_start:pressed {
+	color: rgba(200, 130, 255, 0.8);
+}
+
+#ChronometerUI QPushButton#button_submit {
+	color: rgba(0, 255, 159, 1);
+	font-size: 40px;
+}
+
+#ChronometerUI QPushButton#button_submit:pressed {
+	color: rgba(0, 255, 159, 0.8);
+}
+
+#ChronometerUI QPushButton#button_submit:disabled {
+	color: rgba(0, 255, 159, 0.4);
+}

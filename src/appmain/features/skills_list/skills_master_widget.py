@@ -23,12 +23,13 @@ class SkillsMaster(QWidget):
         self.stacked_main.addWidget(self.WIDGET_skill_interface)
         self.stacked_main.addWidget(self.WIDGET_chronometer)
 
-        self.WIDGET_skills_list.lista_widget.doubleClicked.connect(
+        self.WIDGET_skills_list.list_widget.doubleClicked.connect(
             self.go_to_skill_interface
         )
         self.WIDGET_skill_interface.button_back.clicked.connect(self.go_to_skills_list)
         self.WIDGET_skill_interface.button_clock.clicked.connect(self.go_to_chronometer)
         self.WIDGET_chronometer.button_back.clicked.connect(self.go_to_skill_interface)
+        self.setStyleSheet("background-color:rgba(30, 30, 30, 1);")
 
     def go_to_skills_list(self):
         self.stacked_main.setCurrentIndex(0)
