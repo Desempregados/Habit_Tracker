@@ -16,7 +16,7 @@ class RestartChronometerDialog(QDialog):
         self.layout_main = QVBoxLayout(self)
         self.layout_main.addStretch(1)
 
-        self.label_ask = QLabel("Commit before restart?")
+        self.label_ask = QLabel("Submit before restart?")
         self.label_ask.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layout_main.addWidget(self.label_ask)
 

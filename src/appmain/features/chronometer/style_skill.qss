@@ -65,3 +65,8 @@
 #ChronometerUI QPushButton#button_submit:disabled {
 	color: rgba(0, 255, 159, 0.4);
 }
+
+#ChronometerUI QStatusBar {
+	color: white;
+	font-weight: bold;
+}

@@ -142,7 +142,7 @@ def db_obtain_skill_by_id(skill_id: int) -> str:
         print(e)
 
 
-def db_obtain_dedicated_time(skill_id: int, delta_time: int = 7) -> int:
+def db_obtain_dedicated_time_delta(skill_id: int, delta_time: int = 7) -> int:
     db_path = obtain_path_db()
     dedicated_time = None
     begining_date = date.today()
@@ -160,6 +160,32 @@ def db_obtain_dedicated_time(skill_id: int, delta_time: int = 7) -> int:
             WHERE
                 skill_id = ?
                 AND registry_time BETWEEN ? AND ?;
+            """,
+                param,
+            )
+            dedicated_time = cursor.fetchone()
+            return dedicated_time["total_time"]
+
+    except sqlite3.Error as e:
+        print(e)
+        return 0
+
+
+def db_obtain_dedicated_time(skill_id: int) -> int:
+    db_path = obtain_path_db()
+    dedicated_time = None
+    param = (skill_id,)
+
+    try:
+        with sqlite3.connect(db_path) as conn:
+            _connection_boilerplate(conn)
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+            SELECT IFNULL (SUM(dedicated_time), 0) AS total_time
+            FROM registries
+            WHERE
+                skill_id = ?
             """,
                 param,
             )
@@ -239,4 +265,4 @@ def db_delete_skill(skill_id: int) -> bool:
 
 
 if __name__ == "__main__":
-    print(db_obtain_dedicated_time(2, 7))
+    print(db_obtain_dedicated_time(2))

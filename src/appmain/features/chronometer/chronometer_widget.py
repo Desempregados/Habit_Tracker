@@ -8,10 +8,12 @@ from PyQt6.QtWidgets import (
     QPushButton,
     QLabel,
     QDialog,
+    QStatusBar,
 )
 from PyQt6.QtCore import Qt
 from appmain.database.database import *
 from appmain.features.chronometer.chronometer_logic import ChronometerLogic
+from appmain.common.clickable_label import ClickableLabel
 from appmain.features.chronometer.chronometer_dialogs import (
     RestartChronometerDialog,
     SubmitChronometerDialog,
@@ -27,6 +29,8 @@ class ChronometerUI(QWidget):
         self.setObjectName("ChronometerUI")
 
         self.skill_id = None
+
+        self.label_mode = 0
 
         self.CHRONOMETER_LOGIC = ChronometerLogic()
 
@@ -51,10 +55,11 @@ class ChronometerUI(QWidget):
 
         # ============== Time label ========================
 
-        self.label_time = QLabel("00:00")
+        self.label_time = ClickableLabel("00:00")
         self.label_time.setObjectName("label_time")
         self.label_time.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layout_main.addWidget(self.label_time)
+        self.label_time.clicked.connect(lambda: self.click_label())
 
         self.layout_main.addStretch(3)
 
@@ -94,6 +99,12 @@ class ChronometerUI(QWidget):
         self.button_submit.setEnabled(False)
 
         self.layout_main.addStretch(3)
+
+        # =================== Status bar ====================0
+
+        self.statusbar = QStatusBar(self)
+        self.layout_main.addWidget(self.statusbar)
+        self.statusbar.setObjectName("status_bar")
 
         # =================== Setup funcions =================
 
@@ -145,8 +156,22 @@ class ChronometerUI(QWidget):
 
     # ======================== Keep updating time label ==================
 
-    def update_time(self, formated_time: str):
-        self.label_time.setText(formated_time)
+    def update_time(self, current_time: str):
+        total_time = db_obtain_dedicated_time(self.skill_id)
+        total_time_week = db_obtain_dedicated_time_delta(self.skill_id, 7)
+        total_time_today = db_obtain_dedicated_time_delta(self.skill_id, 1)
+
+        if self.label_mode % 4 == 0:
+            self.label_time.setText(self.form_time(current_time))
+
+        elif self.label_mode % 4 == 1:
+            self.label_time.setText(self.form_time(current_time + total_time_today))
+
+        elif self.label_mode % 4 == 2:
+            self.label_time.setText(self.form_time(current_time + total_time_week))
+
+        elif self.label_mode % 4 == 3:
+            self.label_time.setText(self.form_time(current_time + total_time))
 
     # ========================= Restart button actions ===================
 
@@ -156,13 +181,12 @@ class ChronometerUI(QWidget):
         dialog = RestartChronometerDialog(self)
         result = dialog.exec()
         if result == QDialog.DialogCode.Accepted:
-            self.button_restart.setEnabled(False)
-            self.button_submit.setEnabled(False)
-            self.CHRONOMETER_LOGIC.restart_timer()
+            self.submit_button()
         elif result == QDialog.DialogCode.Rejected:
             self.button_restart.setEnabled(False)
             self.button_submit.setEnabled(False)
             self.CHRONOMETER_LOGIC.restart_timer()
+            self.reset_timer()
 
     # ========================== submit button actions ====================
 
@@ -177,6 +201,33 @@ class ChronometerUI(QWidget):
             self.CHRONOMETER_LOGIC.submit_time()
             self.button_restart.setEnabled(False)
             self.button_submit.setEnabled(False)
+            self.reset_timer()
+            self.popup_submited()
+
+    # ========================== show popup ================================
+
+    def popup_submited(self):
+        self.statusbar.showMessage("Time submited", 2000)
+
+    # =========================== format time =============================
+
+    def form_time(self, s: int) -> str:
+        return f"{int(s // 3600):02d}:{int((s // 60) % 60):02d}:{int(s % 60):02d}"
+
+    # ============================ Click label actions =============================
+
+    def click_label(self):
+        self.label_mode += 1
+        self.CHRONOMETER_LOGIC.signal_update_timer.emit(
+            self.CHRONOMETER_LOGIC.current_time
+        )
+        print(self.label_mode)
+
+    # ============================ Reset timer ======================================
+
+    def reset_timer(self):
+        self.label_mode = 0
+        self.update_time(0)
 
 
 def main():

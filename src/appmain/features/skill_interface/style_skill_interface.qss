@@ -1,0 +1,110 @@
+#SkillsInterface {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#SkillsInterface QPushButton#button_back {
+	color: rgba(200, 130, 255, 1);
+	background-color: transparent;
+	border: none;
+	font-size: 60px;
+	padding: 10px;
+}
+
+#SkillsInterface QPushButton#button_back:pressed {
+	color: rgba(200, 130, 255, 0.8)
+}
+
+#SkillsInterface QLabel#label_skill_name {
+	font-size: 40px;
+	color: rgba(0, 255, 159, 0.9);
+	font-weight: bold;
+}
+
+#SkillsInterface QPushButton#button_clock {
+	color: rgba(0, 255, 159, 0.9);
+	background-color: transparent;
+	border: none;
+	font-size: 280px;
+}
+
+#SkillsInterface QPushButton#button_clock:hover {
+	color: rgba(0, 255, 159, 1);
+	background-color: transparent;
+}
+
+#SkillsInterface QPushButton#button_clock:pressed {
+	color: rgba(0, 255, 159, 0.75);
+}
+
+#SkillsInterface QLabel#dedicated_time {
+	color: white;
+	font-size: 40px;
+	font-weight: bold;
+}
+
+#SkillsInterface QPushButton#button_week {
+	color: white;
+	font-size: 28px;
+	font-weight: bold;
+	background: transparent;
+	border: none;
+}
+
+#SkillsInterface QPushButton#button_today {
+	color: white;
+	font-size: 28px;
+	font-weight: bold;
+	background: transparent;
+	border: none;
+}
+
+#SkillsInterface QPushButton#button_alltime {
+	color: white;
+	font-size: 28px;
+	font-weight: bold;
+	background: transparent;
+	border: none;
+}
+
+#SkillsInterface QPushButton#button_week:hover {
+	color: lightgrey;
+}
+
+#SkillsInterface QPushButton#button_today:hover {
+	color: lightgrey;
+}
+
+#SkillsInterface QPushButton#button_alltime:hover {
+	color: lightgrey;
+}
+
+#SkillsInterface QPushButton#button_week:pressed {
+	color: grey
+}
+
+#SkillsInterface QPushButton#button_today:pressed {
+	color: grey
+}
+
+#SkillsInterface QPushButton#button_alltime:pressed {
+	color: grey
+}
+
+#SkillsInterface QPushButton#button_week:checked {
+	border-bottom: 2px solid rgba(0, 255, 159, 1);
+}
+
+#SkillsInterface QPushButton#button_today:checked {
+	border-bottom: 2px solid rgba(0, 255, 159, 1);
+}
+
+#SkillsInterface QPushButton#button_alltime:checked {
+	border-bottom: 2px solid rgba(0, 255, 159, 1);
+
+}
+
+#SkillsInterface QLabel#label_show_time {
+	font-size: 40px;
+	font-weight: bold;
+	color: white;
+}

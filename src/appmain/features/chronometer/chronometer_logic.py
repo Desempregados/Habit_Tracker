@@ -7,7 +7,7 @@ from appmain.database.database import *
 
 
 class ChronometerLogic(QObject):
-    signal_update_timer = pyqtSignal(str)
+    signal_update_timer = pyqtSignal(int)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -27,7 +27,7 @@ class ChronometerLogic(QObject):
 
     def up_time(self):
         self.current_time += 1
-        self.signal_update_timer.emit(self.form_time(self.current_time))
+        self.signal_update_timer.emit(self.current_time)
 
     def pause_timer(self):
         self.timer.stop()
