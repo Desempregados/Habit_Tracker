@@ -52,8 +52,6 @@ def db_create() -> bool:
 
             conn.commit()
 
-            print(f"Banco de dados criado em {db_path}")
-
             return True
 
     except sqlite3.Error as e:
@@ -63,7 +61,6 @@ def db_create() -> bool:
 
 def db_create_skill(skill_name: str) -> bool:
     if not skill_name.strip():
-        print("Error: Habit name cant be empty")
         return False
 
     db_path = obtain_path_db()
@@ -77,7 +74,6 @@ def db_create_skill(skill_name: str) -> bool:
                 "INSERT INTO skills (name, creation_time) VALUES (?, ?)", params
             )
             conn.commit()
-            print(f"skill {skill_name.strip()} criado com sucesso")
             return True
 
     except sqlite3.Error as e:
@@ -100,7 +96,6 @@ def db_add_registry(skill_id: int, dedicated_time: int = 0) -> bool:
                 params,
             )
             conn.commit()
-            print("registro adicionado")
             return True
     except sqlite3.Error as e:
         print(e)
