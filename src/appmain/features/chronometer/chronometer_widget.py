@@ -221,7 +221,6 @@ class ChronometerUI(QWidget):
         self.CHRONOMETER_LOGIC.signal_update_timer.emit(
             self.CHRONOMETER_LOGIC.current_time
         )
-        print(self.label_mode)
 
     # ============================ Reset timer ======================================
 
