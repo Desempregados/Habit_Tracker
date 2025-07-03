@@ -4,6 +4,8 @@ venv/
 ENV/
 env/
 
+dasda.py
+
 __pycache__/
 *.pyc
 *.pyo
