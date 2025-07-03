@@ -1,7 +1,11 @@
 import sys
 from PyQt6.QtWidgets import (
-    QApplication, QWidget, QVBoxLayout, QHBoxLayout,
-    QLabel, QPushButton, QSpinBox
+    QApplication,
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QPushButton,
+    QSpinBox,
 )
 from PyQt6.QtCore import QTimer
 
@@ -9,9 +13,11 @@ from PyQt6.QtCore import QTimer
 class TimeSelectorWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setStyleSheet("background-color:lightgrey;")
 
-        layout = QHBoxLayout()
+        layout = QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
+        layout.addStretch(1)
 
         # --- Hours ---
         self.hours = QSpinBox()
@@ -35,12 +41,13 @@ class TimeSelectorWidget(QWidget):
         layout.addWidget(self.minutes)
         layout.addWidget(self.seconds)
 
+        layout.addStretch(1)
         self.setLayout(layout)
 
     def get_total_seconds(self):
-        return (self.hours.value() * 3600 +
-                self.minutes.value() * 60 +
-                self.seconds.value())
+        return (
+            self.hours.value() * 3600 + self.minutes.value() * 60 + self.seconds.value()
+        )
 
     def set_time_in_seconds(self, total_seconds):
         h = total_seconds // 3600
@@ -61,7 +68,8 @@ class TimerUI(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle('Timer')
+        self.setStyleSheet("background-color:grey;")
+        self.setWindowTitle("Timer")
         self.setGeometry(100, 100, 350, 150)
 
         self.remaining_time_seconds = 0
@@ -150,3 +158,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
