@@ -24,7 +24,13 @@
 	color: rgba(0, 255, 159, 0.9);
 	background-color: transparent;
 	border: none;
-	font-size: 280px;
+	font-size: 180px;
+}
+
+#SkillsInterface QLabel#label_goal {
+	color: white;
+	font-weight: bold;
+	font-size: 24px;
 }
 
 #SkillsInterface QPushButton#button_clock:hover {
