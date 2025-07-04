@@ -7,7 +7,9 @@ from PyQt6.QtWidgets import (
     QApplication,
     QVBoxLayout,
     QStackedWidget,
+    
 )
+from PyQt6.QtGui import QFont
 
 
 class SkillsMaster(QWidget):
@@ -47,6 +49,7 @@ class SkillsMaster(QWidget):
 
 def main():
     app = QApplication(sys.argv)
+    app.setFont(QFont("Arial"))
     window = SkillsMaster()
     window.show()
     sys.exit(app.exec())

@@ -10,3 +10,7 @@ Classifier: Operating System :: OS Independent
 Requires-Python: >=3.10
 Description-Content-Type: text/markdown
 Requires-Dist: pyqt6
+
+# Habit_Tracker
+
+## Developed By zGreezze && 4rtx
