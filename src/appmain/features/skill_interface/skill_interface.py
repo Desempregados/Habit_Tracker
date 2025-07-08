@@ -57,19 +57,20 @@ class SkillInterface(QWidget):
         self.label_goal = QLabel("00:00:00/11:11:11")
         self.label_goal.setObjectName("label_goal")
         self.label_goal.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.layout_main.addWidget(self.label_goal)
+        # self.layout_main.addWidget(self.label_goal)
 
         # ========================= Progress bar ==================
 
-        self.progress_bar = QProgressBar(self)
-        self.layout_main.addWidget(self.progress_bar)
+        self.progress_bar = QProgressBar()
+        # self.layout_main.addWidget(self.progress_bar)
         self.progress_bar.setRange(0, 100)
         self.progress_bar.setValue(50)
 
         # ========================= Goal button ====================
 
         self.layout_button_goal = QHBoxLayout()
-        self.button_goal = QPushButton(self)
+        self.button_goal = QPushButton("")
+        self.button_goal.setObjectName("button_goal")
         self.layout_button_goal.addStretch(1)
         self.layout_button_goal.addWidget(self.button_goal)
         self.layout_button_goal.addStretch(1)

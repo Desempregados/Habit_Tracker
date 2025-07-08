@@ -42,6 +42,23 @@
 	color: rgba(0, 255, 159, 0.75);
 }
 
+#SkillsInterface QPushButton#button_goal {
+	color: rgba(0, 255, 159, 0.9);
+	background-color: transparent;
+	border: none;
+	font-size: 80px;
+	padding-right: 20px;
+}
+
+#SkillsInterface QPushButton#button_goal:hover {
+	color: rgba(0, 255, 159, 1);
+	background-color: transparent;
+}
+
+#SkillsInterface QPushButton#button_goal:pressed {
+	color: rgba(0, 255, 159, 0.75);
+}
+
 #SkillsInterface QLabel#dedicated_time {
 	color: white;
 	font-size: 40px;

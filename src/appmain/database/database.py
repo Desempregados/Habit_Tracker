@@ -53,6 +53,7 @@ def db_create() -> bool:
             CREATE TABLE IF NOT EXISTS goals (
 
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            goal_name TEXT NOT NULL,
             skill_id INTEGER NOT NULL,
             goal_type TEXT NOT NULL,
             goal_value INTEGER NOT NULL,
@@ -61,7 +62,7 @@ def db_create() -> bool:
             status TEXT NOT NULL DEFAULT "active",
 
             FOREIGN KEY (skill_id) REFERENCES skills (id) ON DELETE CASCADE,
-            CONSTRAINT unique_goal UNIQUE (skill_id, goal_type, start_date)
+            CONSTRAINT unique_goal UNIQUE (skill_id, goal_name)
             );
             """)
 
@@ -125,7 +126,12 @@ def db_add_registry(skill_id: int, dedicated_time: int = 0) -> bool:
 
 
 def db_create_goal(
-    skill_id: int, goal_type: str, goal_value: int, time_delta: int, status="active"
+    skill_id: int,
+    goal_name: str,
+    goal_type: str,
+    goal_value: int,
+    time_delta: int,
+    status="active",
 ) -> bool:
     possible_types = ("time", "quantity")
     if goal_type not in possible_types:
@@ -133,7 +139,15 @@ def db_create_goal(
 
     start_date = date.today()
     end_date = date.today() + timedelta(days=time_delta - 1)
-    params = (skill_id, goal_type, goal_value, str(start_date), str(end_date), status)
+    params = (
+        skill_id,
+        goal_name,
+        goal_type,
+        goal_value,
+        str(start_date),
+        str(end_date),
+        status,
+    )
     db_path = obtain_path_db()
     try:
         with sqlite3.connect(db_path) as conn:
@@ -141,8 +155,8 @@ def db_create_goal(
             cursor = conn.cursor()
             cursor.execute(
                 """
-            INSERT INTO goals  (skill_id, goal_type, goal_value, start_date, end_date, status)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO goals  (skill_id, goal_name, goal_type, goal_value, start_date, end_date, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
                 params,
             )
@@ -286,6 +300,32 @@ def db_read_goal_value(goal_id: int) -> int:
     except sqlite3.Error as e:
         print(e)
         return -1
+
+
+def db_read_goal_name(goal_id: int) -> int:
+    db_path = obtain_path_db()
+    param = (goal_id,)
+    try:
+        with sqlite3.connect(db_path) as conn:
+            _connection_boilerplate(conn)
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                SELECT goal_name FROM goals
+                WHERE id = ?
+            """,
+                param,
+            )
+            name = cursor.fetchone()
+            if name:
+                return name["goal_name"]
+
+            else:
+                raise Exception("Invalid Goal id")
+
+    except sqlite3.Error as e:
+        print(e)
+        return ""
 
 
 def db_read_goal_type(goal_id: int) -> int:
@@ -492,5 +532,23 @@ def db_delete_goal(goal_id: int) -> bool:
         return False
 
 
+def db_delete_table(table_name: str) -> bool:
+    db_path = obtain_path_db()
+    try:
+        with sqlite3.connect(db_path) as conn:
+            _connection_boilerplate(conn)
+            cursor = conn.cursor()
+            cursor.execute(
+                f"""
+                DROP TABLE IF EXISTS {table_name}
+                """
+            )
+            conn.commit()
+            return True
+    except sqlite3.Error as e:
+        print(e)
+        return False
+
+
 if __name__ == "__main__":
-    pass
+    db_create()

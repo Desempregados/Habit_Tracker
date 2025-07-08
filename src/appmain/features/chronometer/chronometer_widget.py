@@ -40,7 +40,7 @@ class ChronometerUI(QWidget):
 
         self.layout_button_back = QHBoxLayout()
         self.layout_main.addLayout(self.layout_button_back)
-        self.button_back = QPushButton("Uai")
+        self.button_back = QPushButton("")
         self.button_back.setObjectName("button_back")
         self.layout_button_back.addWidget(self.button_back)
         self.layout_button_back.addStretch(1)
