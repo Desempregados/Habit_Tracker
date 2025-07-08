@@ -49,7 +49,6 @@ class SkillsMaster(QWidget):
 
 def main():
     app = QApplication(sys.argv)
-    app.setFont(QFont("Arial"))
     window = SkillsMaster()
     window.show()
     sys.exit(app.exec())
