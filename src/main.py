@@ -5,6 +5,7 @@ import sys
 
 
 def main():
+    db_create()
     app = QApplication(sys.argv)
     window = SkillsMaster()
     window.show()
