@@ -40,3 +40,6 @@ class ChronometerLogic(QObject):
     def submit_time(self):
         db_add_registry(self.working_id, self.current_time)
         self.restart_timer()
+
+    def add_time_to_goal(self, goal_id: int):
+        db_add_goal_value(goal_id, self.current_time)

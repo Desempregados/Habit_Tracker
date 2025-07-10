@@ -55,7 +55,7 @@ class ChronometerUI(QWidget):
 
         # ============== Time label ========================
 
-        self.label_time = ClickableLabel("00:00")
+        self.label_time = ClickableLabel("00:00:00")
         self.label_time.setObjectName("label_time")
         self.label_time.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layout_main.addWidget(self.label_time)
@@ -198,6 +198,9 @@ class ChronometerUI(QWidget):
         result = dialog.exec()
 
         if result == QDialog.DialogCode.Accepted:
+            goal_id = dialog.goal_id
+            if goal_id != -1:
+                self.CHRONOMETER_LOGIC.add_time_to_goal(goal_id)
             self.CHRONOMETER_LOGIC.submit_time()
             self.button_restart.setEnabled(False)
             self.button_submit.setEnabled(False)

@@ -56,6 +56,7 @@ def db_create() -> bool:
             goal_name TEXT NOT NULL,
             skill_id INTEGER NOT NULL,
             goal_type TEXT NOT NULL,
+            current_value INTEGER DEFAULT 0,
             goal_value INTEGER NOT NULL,
             start_date TEXT NOT NULL,
             end_date TEXT NOT NULL,
@@ -350,6 +351,28 @@ def db_read_goal_type(goal_id: int) -> int:
         return -1
 
 
+def db_read_goal_current_value(goal_id: int) -> int:
+    db_path = obtain_path_db()
+    param = (goal_id,)
+    try:
+        with sqlite3.connect(db_path) as conn:
+            _connection_boilerplate(conn)
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                SELECT current_value FROM goals
+                WHERE id = ?
+            """,
+                param,
+            )
+            current_value = cursor.fetchone()
+            return current_value["current_value"]
+
+    except sqlite3.Error as e:
+        print(e)
+        return -1
+
+
 def db_read_goal_by_skill(skill_id: int, only_actives: bool = True) -> list:
     db_path = obtain_path_db()
     param = (skill_id,)
@@ -489,6 +512,26 @@ def db_update_goal_data(goal_id: int, new_value: int, new_end_date: date) -> boo
         return False
 
 
+def db_add_goal_value(goal_id: int, value: int) -> bool:
+    db_path = obtain_path_db()
+    params = (value, goal_id)
+    try:
+        with sqlite3.connect(db_path) as conn:
+            _connection_boilerplate(conn)
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+            UPDATE goals SET current_value = current_value + ? WHERE id = ?
+            """,
+                params,
+            )
+            conn.commit()
+            return True
+    except sqlite3.Error as e:
+        print(e)
+        return False
+
+
 # DELETE
 
 
@@ -551,4 +594,5 @@ def db_delete_table(table_name: str) -> bool:
 
 
 if __name__ == "__main__":
-    db_create()
+    print(db_read_goal_current_value(2))
+    db_add_goal_value(2, 100)

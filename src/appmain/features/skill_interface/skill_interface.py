@@ -52,20 +52,6 @@ class SkillInterface(QWidget):
 
         self.layout_main.addStretch(1)
 
-        # ========================= Label goal ====================
-
-        self.label_goal = QLabel("00:00:00/11:11:11")
-        self.label_goal.setObjectName("label_goal")
-        self.label_goal.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        # self.layout_main.addWidget(self.label_goal)
-
-        # ========================= Progress bar ==================
-
-        self.progress_bar = QProgressBar()
-        # self.layout_main.addWidget(self.progress_bar)
-        self.progress_bar.setRange(0, 100)
-        self.progress_bar.setValue(50)
-
         # ========================= Goal button ====================
 
         self.layout_button_goal = QHBoxLayout()
@@ -84,6 +70,7 @@ class SkillInterface(QWidget):
         self.label_skill_dedicated_time.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layout_main.addWidget(self.label_skill_dedicated_time)
 
+        self.layout_main.addStretch(4)
         # ========================== Time interval selection ========
 
         self.layout_time_interval = QHBoxLayout()
@@ -93,6 +80,7 @@ class SkillInterface(QWidget):
         self.buttongroup_time_interval = QButtonGroup(self)
         self.buttongroup_time_interval.setExclusive(True)
 
+        self.layout_main.addStretch(4)
         # ========================== Button today ====================
 
         self.button_today = QPushButton("today")
@@ -132,7 +120,7 @@ class SkillInterface(QWidget):
         self.layout_main.addWidget(self.label_show_time)
         self.label_show_time.setObjectName("label_show_time")
 
-        self.layout_main.addStretch(2)
+        self.layout_main.addStretch(12)
 
         self.Load_stylesheet()
 

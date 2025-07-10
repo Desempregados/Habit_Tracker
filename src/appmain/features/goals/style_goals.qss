@@ -1,0 +1,110 @@
+#ContainerGoal {
+	background-color: rgba(30, 30, 30, 1);
+	border: 10px solid white;
+	font-family: "Outfit", "JetBrainsMono Nerd Font";
+}
+
+#ContainerGoal QLabel#label_skill_type {
+	font-size: 100px;
+	padding-right: 20px;
+	color: rgb(0, 255, 139);
+}
+
+#ContainerGoal QLabel#label_goal_name {
+	font-size: 30px;
+	font-weight: bold;
+	color: white;
+}
+
+#ContainerGoal QLabel#label_progress {
+	font-size: 20px;
+	font-weight: bold;
+	color: silver;
+}
+
+#ContainerGoal QPushButton {
+	font-size: 20px;
+	padding: 5px;
+	color: rgba(0, 255, 139, 0.8);
+	background-color: transparent;
+	border: none;
+}
+
+#ContainerGoal QPushButton:hover {
+	color: rgba(0, 255, 139, 1);
+}
+
+#ContainerGoal QPushButton:pressed {
+	color: rgba(0, 255, 139, 0.6);
+}
+
+#ContainerGoal QProgressBar {
+	border-radius: 10px;
+	background-color: grey;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#ContainerGoal QProgressBar::chunk {
+	border-radius: 10px;
+	background-color: rgba(200, 130, 255, 1);
+}
+
+#GoalsUI {
+	background-color: rgba(30, 30, 30, 1);
+	font-family: "Outfit", "JetBrainsMono Nerd Font";
+}
+
+#GoalsUI QPushButton#button_back {
+	font-size: 40px;
+	color: rgba(0, 255, 139, 0.8);
+	background-color: transparent;
+	border: none;
+	padding-right: 5px;
+}
+
+#GoalsUI QPushButton#button_back:hover {
+	color: rgba(0, 255, 139, 1);
+}
+
+#GoalsUI QPushButton#button_back:pressed {
+	color: rgba(0, 255, 139, 0.6);
+}
+
+#GoalsUI QLabel#label_skill_name {
+	font-size: 30px;
+	font-weight: bold;
+	color: white;
+}
+
+#GoalsUI QLabel#label_total_time {
+	font-size: 40px;
+	font-weight: bold;
+	color: rgba(200, 130, 255, 1);
+}
+
+#GoalsUI QScrollArea {
+	border: none;
+}
+
+#GoalsUI QWidget#widget_scroll_area {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#GoalsUI QPushButton#button_add_goal {
+	font-size: 40px;
+	color: rgba(0, 255, 139, 0.8);
+	background-color: transparent;
+	border: none;
+	padding-right: 10px;
+}
+
+#GoalsUI QPushButton#button_add_goal:hover {
+	color: rgba(0, 255, 139, 1);
+}
+
+#GoalsUI QPushButton#button_add_goal:pressed {
+	color: rgba(0, 255, 139, 0.6);
+}

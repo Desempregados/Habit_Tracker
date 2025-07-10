@@ -6,8 +6,10 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
     QPushButton,
     QApplication,
+    QComboBox,
 )
 from PyQt6.QtCore import Qt
+from appmain.database.database import db_read_goal_by_skill
 
 
 class RestartChronometerDialog(QDialog):
@@ -44,19 +46,34 @@ class RestartChronometerDialog(QDialog):
 class SubmitChronometerDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.goal_id = -1
         self.layout_main = QVBoxLayout(self)
         self.layout_main.addStretch(1)
 
-        self.label_ask = QLabel("Submit Time?")
+        # ================ label ask ============================
+
+        self.label_ask = QLabel("Submit time to wich goal?")
         self.label_ask.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layout_main.addWidget(self.label_ask)
+
+        # ================ Combo box goals ======================
+
+        self.combo_box_goals = QComboBox()
+        self.layout_main.addWidget(self.combo_box_goals)
+        self.combo_box_goals.addItem("no goal", -1)
+
+        # ================ Layout buttons =======================
 
         self.layout_buttons = QHBoxLayout()
         self.layout_main.addLayout(self.layout_buttons)
         self.layout_buttons.addStretch(1)
 
+        # ================ Button yes ============================
+
         self.button_yes = QPushButton("Yes")
         self.layout_buttons.addWidget(self.button_yes)
+
+        # ================ Button no ============================
 
         self.button_no = QPushButton("No")
         self.layout_buttons.addWidget(self.button_no)
@@ -64,8 +81,22 @@ class SubmitChronometerDialog(QDialog):
         self.layout_buttons.addStretch(1)
         self.layout_main.addStretch(1)
 
-        self.button_yes.clicked.connect(self.accept)
+        # =============== connections ============================
+
+        self.button_yes.clicked.connect(self.accept_action)
         self.button_no.clicked.connect(self.reject)
+
+        self.load_goals(2)
+
+    def load_goals(self, skill_id: int):
+        goals = db_read_goal_by_skill(skill_id)
+        for goal in goals:
+            item = (goal["goal_name"], goal["id"])
+            self.combo_box_goals.addItem(item[0], item[1])
+
+    def accept_action(self):
+        self.goal_id = self.combo_box_goals.currentData()
+        self.accept()
 
 
 def main():

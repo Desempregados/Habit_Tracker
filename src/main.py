@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QApplication
-from appmain.features.skill_master.skills_master_widget import SkillsMaster
+from appmain.main_window.main_window import MainWindow
 from appmain.database.database import db_create
 import sys
 
@@ -7,7 +7,7 @@ import sys
 def main():
     db_create()
     app = QApplication(sys.argv)
-    window = SkillsMaster()
+    window = MainWindow()
     window.show()
     sys.exit(app.exec())
 

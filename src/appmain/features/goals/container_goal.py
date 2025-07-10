@@ -25,27 +25,32 @@ class ContainerGoal(QWidget):
 
         super().__init__(parent)
         self.layout_main = QHBoxLayout(self)
+        self.setObjectName("ContainerGoal")
 
         # ===================== Label Skill Type ==========================
 
         self.label_skill_type = QLabel("")
         self.layout_main.addWidget(self.label_skill_type)
+        self.label_skill_type.setObjectName("label_skill_type")
 
         # ===================== Layout rogress bar =========================
 
         self.layout_progress = QVBoxLayout()
         self.layout_main.addLayout(self.layout_progress)
         self.layout_progress.addStretch(1)
+
         # ====================== Label goal name ===========================
 
         self.label_goal_name = QLabel("Goal name")
         self.layout_progress.addWidget(self.label_goal_name)
+        self.label_goal_name.setObjectName("label_goal_name")
 
         # ====================== Label progress ============================
 
-        self.label_progress = ClickableLabel("00:00:00")
+        self.label_progress = ClickableLabel("00:00:00/00:00:00")
         self.layout_progress.addWidget(self.label_progress)
         self.label_progress.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_progress.setObjectName("label_progress")
 
         # ====================== Progress bar ===============================
 
@@ -76,14 +81,32 @@ class ContainerGoal(QWidget):
         if goal_id:
             self.load_goal_data(self.goal_id)
 
+        self.Load_qss()
+
+    # ====================== Load qss ==================================
+
+    def Load_qss(self):
+        STYLE_DIR = Path(__file__).resolve().parent / "style_goals.qss"
+        with open(STYLE_DIR, "r", encoding="UTF-8") as f:
+            style_qss = f.read()
+            self.setStyleSheet(style_qss)
+
+    # ======================= Format time to string ====================
+
     def form_time(self, s: int) -> str:
         return f"{int(s // 3600):02d}:{int((s // 60) % 60):02d}:{int(s % 60):02d}"
 
+    # ======================== Load all necessary goal data ==============
+
     def load_goal_data(self, goal_id: int):
         goal_name = db_read_goal_name(goal_id)
+        current_value = self.form_time(db_read_goal_current_value(goal_id))
         goal_time = self.form_time(db_read_goal_value(goal_id))
         self.label_goal_name.setText(goal_name)
-        self.label_progress.setText(goal_time)
+        self.label_progress.setText(f"{current_value}/{goal_time}")
+        self.set_progress_values(goal_id)
+
+    # ======================== Delete goal =================================
 
     def delete_goal(self):
         resposta = QMessageBox.question(
@@ -97,10 +120,26 @@ class ContainerGoal(QWidget):
             db_delete_goal(self.goal_id)
             self.goal_deleted.emit()
 
+    # ============================== Set progress values =====================
+
+    def set_progress_values(self, goal_id: int):
+        goal_value = db_read_goal_value(goal_id)
+        current_value = db_read_goal_current_value(goal_id)
+        if current_value >= goal_value:
+            self.label_progress.setText(
+                f"{self.form_time(goal_value)}/{self.form_time(goal_value)}"
+            )
+            self.progress_bar.setValue(100)
+            return
+
+        progress_value = (current_value / goal_value) * 100
+        self.progress_bar.setValue(int(progress_value))
+
 
 def main():
     app = QApplication(sys.argv)
-    window = ContainerGoal(4)
+    window = ContainerGoal()
+    window.load_goal_data(2)
     window.show()
     sys.exit(app.exec())
 

@@ -7,6 +7,8 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
     QDialog,
     QScrollArea,
+    QLabel,
+    QGridLayout,
 )
 from PyQt6.QtCore import Qt
 from appmain.features.goals.container_goal import ContainerGoal
@@ -20,20 +22,42 @@ class GoalsUI(QWidget):
         # ===================== Boilerplate =============================
 
         super().__init__(parent)
+        self.setObjectName("GoalsUI")
         self.layout_main = QVBoxLayout(self)
 
-        # ===================== Button select skill =====================
+        # ===================== Button back =============================
 
-        self.layout_button_select_skill = QHBoxLayout()
-        self.layout_button_select_skill.addStretch(1)
-        self.button_select_skill = QPushButton("Skill Name")
-        self.layout_button_select_skill.addWidget(self.button_select_skill)
-        self.layout_main.addLayout(self.layout_button_select_skill)
-        self.layout_button_select_skill.addStretch(1)
+        self.layout_top_buttons = QGridLayout()
+        self.button_back = QPushButton("")
+        self.button_back.setObjectName("button_back")
+        self.layout_top_buttons.addWidget(
+            self.button_back, 0, 0, alignment=Qt.AlignmentFlag.AlignLeft
+        )
+
+        # ===================== Label select skill =====================
+
+        self.label_skill_name = QLabel("Skill Name")
+        self.label_skill_name.setObjectName("label_skill_name")
+        self.layout_top_buttons.addWidget(
+            self.label_skill_name, 0, 1, alignment=Qt.AlignmentFlag.AlignCenter
+        )
+
+        self.layout_top_buttons.setColumnStretch(0, 1)
+        self.layout_top_buttons.setColumnStretch(2, 1)
+        self.layout_main.addLayout(self.layout_top_buttons)
+
+        # ====================== Label total time ==============================
+
+        self.label_total_time = QLabel("00:00:00")
+        self.label_total_time.setObjectName("label_total_time")
+        self.layout_main.addWidget(
+            self.label_total_time, alignment=Qt.AlignmentFlag.AlignCenter
+        )
 
         # ====================== Goals scroll area ============================
 
         self.scroll_area_goals = QScrollArea()
+        self.scroll_area_goals.setObjectName("scroll_area")
         self.scroll_area_goals.setWidgetResizable(True)
         self.scroll_area_goals.setVerticalScrollBarPolicy(
             Qt.ScrollBarPolicy.ScrollBarAsNeeded
@@ -45,6 +69,7 @@ class GoalsUI(QWidget):
         # ====================== Widget scroll area ===========================
 
         self.widget_scroll_area_goals = QWidget()
+        self.widget_scroll_area_goals.setObjectName("widget_scroll_area")
         self.layout_scroll_area = QVBoxLayout()
         self.widget_scroll_area_goals.setLayout(self.layout_scroll_area)
         self.scroll_area_goals.setWidget(self.widget_scroll_area_goals)
@@ -58,15 +83,29 @@ class GoalsUI(QWidget):
 
         self.layout_button_add_goal.addStretch(1)
         self.button_add_goal = QPushButton("")
+        self.button_add_goal.setObjectName("button_add_goal")
         self.layout_button_add_goal.addWidget(self.button_add_goal)
         self.layout_button_add_goal.addStretch(1)
 
         self.button_add_goal.clicked.connect(lambda: self.add_goal())
 
+        self.Load_qss()
+
+    # ====================== Load qss ==================================
+
+    def Load_qss(self):
+        STYLE_DIR = Path(__file__).resolve().parent / "style_goals.qss"
+        with open(STYLE_DIR, "r", encoding="UTF-8") as f:
+            style_qss = f.read()
+            self.setStyleSheet(style_qss)
+
+    # ====================== Load skill data ============================
+
     def load_skill_data(self, skill_id: int):
         self.clear_containers()
         self.skill_id = skill_id
         skill_name = db_obtain_skill_by_id(skill_id)
+        total_time = self.form_time(db_obtain_dedicated_time(skill_id))
 
         goals_list: list = db_read_goal_by_skill(skill_id, False)
 
@@ -78,13 +117,18 @@ class GoalsUI(QWidget):
 
         self.layout_scroll_area.addStretch(1)
 
-        self.button_select_skill.setText(skill_name)
+        self.label_skill_name.setText(skill_name)
+        self.label_total_time.setText(total_time)
+
+    # ========================= Clear containers ============================
 
     def clear_containers(self):
         while self.layout_scroll_area.count():
             child = self.layout_scroll_area.takeAt(0)
             if child.widget():
                 child.widget().deleteLater()
+
+    # ========================= Add goals ====================================
 
     def add_goal(self):
         dialog = NewGoalDialog(self)
@@ -97,6 +141,11 @@ class GoalsUI(QWidget):
 
             db_create_goal(self.skill_id, name, "time", value, 7)
             self.load_skill_data(self.skill_id)
+
+    # ========================== Form time ====================================
+
+    def form_time(self, s: int) -> str:
+        return f"{int(s // 3600):02d}:{int((s // 60) % 60):02d}:{int(s % 60):02d}"
 
 
 def main():

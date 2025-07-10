@@ -1,3 +1,7 @@
+#SkillsLuistUI {
+	font-family: "Outfit", "JetBrainsMono Nerd Font";
+}
+
 #SkillsListUI QListWidget#list_widget {
 	font-weight: bold;
 	font-size: 30px;
