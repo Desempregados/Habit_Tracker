@@ -4,6 +4,15 @@
 	font-family: "Outfit", "JetBrainsMono Nerd Font";
 }
 
+#ContainerGoal QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#ContainerGoal QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
+}
+
 #ContainerGoal QLabel#label_skill_type {
 	font-size: 100px;
 	padding-right: 20px;
@@ -12,13 +21,11 @@
 
 #ContainerGoal QLabel#label_goal_name {
 	font-size: 30px;
-	font-weight: bold;
 	color: white;
 }
 
 #ContainerGoal QLabel#label_progress {
 	font-size: 20px;
-	font-weight: bold;
 	color: silver;
 }
 
@@ -57,6 +64,15 @@
 	font-family: "Outfit", "JetBrainsMono Nerd Font";
 }
 
+#GoalsUI QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#GoalsUI QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
+}
+
 #GoalsUI QPushButton#button_back {
 	font-size: 40px;
 	color: rgba(0, 255, 139, 0.8);
@@ -75,13 +91,11 @@
 
 #GoalsUI QLabel#label_skill_name {
 	font-size: 30px;
-	font-weight: bold;
 	color: white;
 }
 
 #GoalsUI QLabel#label_total_time {
 	font-size: 40px;
-	font-weight: bold;
 	color: rgba(200, 130, 255, 1);
 }
 

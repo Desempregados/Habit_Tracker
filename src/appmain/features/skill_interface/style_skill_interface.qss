@@ -1,6 +1,14 @@
 #SkillsInterface {
 	background-color: rgba(30, 30, 30, 1);
-	font-family: "Outfit", "JetBrainsMono Nerd Font";
+}
+
+#SkillsInterface QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#SkillsInterface QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
 }
 
 #SkillsInterface QPushButton#button_back {
@@ -8,7 +16,6 @@
 	background-color: transparent;
 	border: none;
 	font-size: 60px;
-	padding: 10px;
 }
 
 #SkillsInterface QPushButton#button_back:pressed {
@@ -18,7 +25,6 @@
 #SkillsInterface QLabel#label_skill_name {
 	font-size: 40px;
 	color: rgba(0, 255, 159, 0.9);
-	font-weight: bold;
 }
 
 #SkillsInterface QPushButton#button_clock {
@@ -30,7 +36,6 @@
 
 #SkillsInterface QLabel#label_goal {
 	color: white;
-	font-weight: bold;
 	font-size: 24px;
 }
 
@@ -48,7 +53,6 @@
 	background-color: transparent;
 	border: none;
 	font-size: 80px;
-	padding-right: 20px;
 }
 
 #SkillsInterface QPushButton#button_goal:hover {
@@ -63,13 +67,11 @@
 #SkillsInterface QLabel#dedicated_time {
 	color: white;
 	font-size: 40px;
-	font-weight: bold;
 }
 
 #SkillsInterface QPushButton#button_week {
 	color: white;
 	font-size: 28px;
-	font-weight: bold;
 	background: transparent;
 	border: none;
 }
@@ -77,7 +79,6 @@
 #SkillsInterface QPushButton#button_today {
 	color: white;
 	font-size: 28px;
-	font-weight: bold;
 	background: transparent;
 	border: none;
 }
@@ -85,7 +86,6 @@
 #SkillsInterface QPushButton#button_alltime {
 	color: white;
 	font-size: 28px;
-	font-weight: bold;
 	background: transparent;
 	border: none;
 }
@@ -129,6 +129,5 @@
 
 #SkillsInterface QLabel#label_show_time {
 	font-size: 40px;
-	font-weight: bold;
 	color: white;
 }

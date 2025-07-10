@@ -18,7 +18,7 @@ class MainWindow(QMainWindow):
         self.load_icon()
 
     def load_fonts(self):
-        fonts_to_load = ["Outfit.ttf", "JetBrainsMonoNerdFont.ttf"]
+        fonts_to_load = ["Roboto.ttf", "UbuntuNerd.ttf"]
 
         path_ui = get_path_asset(f"fonts/{fonts_to_load[0]}")
         path_nerd = get_path_asset(f"fonts/{fonts_to_load[1]}")

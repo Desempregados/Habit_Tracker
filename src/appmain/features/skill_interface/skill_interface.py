@@ -9,7 +9,6 @@ from PyQt6.QtWidgets import (
     QWidget,
     QPushButton,
     QButtonGroup,
-    QProgressBar,
 )
 from PyQt6.QtCore import Qt
 

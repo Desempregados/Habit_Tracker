@@ -42,13 +42,13 @@ class SkillsListUI(QWidget):
         self.layout_buttons.addStretch(3)
 
         # Create skill button
-        self.button_create = QPushButton("create")
+        self.button_create = QPushButton("")
         self.button_create.setObjectName("button_create")
         self.layout_buttons.addWidget(self.button_create)
         self.button_create.clicked.connect(self.new_skill)
 
         # Delete skill button
-        self.button_delete = QPushButton("del")
+        self.button_delete = QPushButton("")
         self.button_delete.setObjectName("button_delete")
         self.button_delete.clicked.connect(self.confirm_delete)
         self.layout_buttons.addStretch(1)

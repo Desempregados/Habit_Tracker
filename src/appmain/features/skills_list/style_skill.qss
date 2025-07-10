@@ -1,9 +1,17 @@
-#SkillsLuistUI {
-	font-family: "Outfit", "JetBrainsMono Nerd Font";
+#SkillsListUI {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#SkillsListUI QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#SkillsListUI QListWidget {
+	font-family: "Roboto";
+	font-weight: 700;
 }
 
 #SkillsListUI QListWidget#list_widget {
-	font-weight: bold;
 	font-size: 30px;
 	background-color: rgba(30, 30, 30, 1);
 	show-decoration-selected: 0;

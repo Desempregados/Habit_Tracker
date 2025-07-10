@@ -1,12 +1,16 @@
 #ChronometerUI {
 	background-color: rgba(30, 30, 30, 1);
-	font-family: "Outfit", "JetBrainsMono Nerd Font";
+}
+
+#ChronomerterUI QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
 }
 
 #ChronometerUI QPushButton {
 	background-color: transparent;
 	border: none;
-	padding: 10px;
+	font-family: "Ubuntu Nerd Font";
 }
 
 #ChronometerUI QPushButton#button_back {
