@@ -86,8 +86,6 @@ class SubmitChronometerDialog(QDialog):
         self.button_yes.clicked.connect(self.accept_action)
         self.button_no.clicked.connect(self.reject)
 
-        self.load_goals(2)
-
     def load_goals(self, skill_id: int):
         goals = db_read_goal_by_skill(skill_id)
         for goal in goals:

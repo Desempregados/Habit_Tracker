@@ -122,3 +122,38 @@
 #GoalsUI QPushButton#button_add_goal:pressed {
 	color: rgba(0, 255, 139, 0.6);
 }
+
+#NewGoalDialog {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#NewGoalDialog QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#NewGoalDialog QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
+	font-size: 34px;
+	color: white;
+	margin: 0px;
+}
+
+#NewGoalDialog QWidget[class="CustomSpinBox"] QPushButton {
+	background-color: transparent;
+	padding: 0px;
+	border: none;
+	color: white;
+	font-size: 14px;
+	margin: 0px;
+}
+
+#NewGoalDialog QWidget[class="CustomSpinBox"] QSpinBox {
+	background-color: transparent;
+	padding: 0px;
+	border: none;
+	margin: 0px;
+	qproperty-alignment: 'AlignCenter';
+	color: white;
+	font-size: 34px;
+}

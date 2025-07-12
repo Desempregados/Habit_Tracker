@@ -195,6 +195,7 @@ class ChronometerUI(QWidget):
             self.play_button()
 
         dialog = SubmitChronometerDialog(self)
+        dialog.load_goals(self.skill_id)
         result = dialog.exec()
 
         if result == QDialog.DialogCode.Accepted:
