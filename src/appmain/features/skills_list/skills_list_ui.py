@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from appmain.database.database import db_create_skill
+from appmain.database.create import db_create_skill
 from appmain.database.read import db_obtain_all_skills
 from appmain.database.update import db_rename_skill
 from appmain.database.delete import db_delete_skill
