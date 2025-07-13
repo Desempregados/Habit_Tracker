@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtGui import QFontDatabase, QIcon
 from appmain.features.skill_master.skills_master_widget import SkillsMaster
-from appmain.database.database import db_create
+from appmain.database.create import db_create
 from appmain.assets import get_path_asset
 import sys
 
