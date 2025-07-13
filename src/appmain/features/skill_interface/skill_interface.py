@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from appmain.database.database import *
+from appmain.database.read import db_obtain_skill_by_id, db_obtain_dedicated_time_delta, db_obtain_dedicated_time
 from PyQt6.QtWidgets import (
     QApplication,
     QVBoxLayout,
