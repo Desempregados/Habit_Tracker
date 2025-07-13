@@ -14,7 +14,7 @@ from appmain.common.shadows import AppShadows
 from appmain.features.pomodoro.pomothread import Perfil_pomodoro
 from appmain.features.pomodoro.configwindow import ConfigWindow
 from appmain.common.animations import AnimationsPulse
-from appmain.database.database import *
+from appmain.database.read import db_obtain_skill_by_id
 from appmain import assets
 
 

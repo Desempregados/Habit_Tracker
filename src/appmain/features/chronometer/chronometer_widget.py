@@ -11,7 +11,8 @@ from PyQt6.QtWidgets import (
     QStatusBar,
 )
 from PyQt6.QtCore import Qt
-from appmain.database.database import *
+from appmain.database.read import db_obtain_skill_by_id, db_obtain_dedicated_time, db_obtain_dedicated_time_delta
+
 from appmain.features.chronometer.chronometer_logic import ChronometerLogic
 from appmain.common.clickable_label import ClickableLabel
 from appmain.features.chronometer.chronometer_dialogs import (

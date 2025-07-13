@@ -1,24 +1,24 @@
 import sys
 from pathlib import Path
-from appmain.database.database import *
+from appmain.database.database import db_create_skill
+from appmain.database.read import db_obtain_all_skills
+from appmain.database.update import db_rename_skill
+from appmain.database.delete import db_delete_skill
 from appmain.features.skills_list.create_skill_dialog import CreateSkill
 from appmain.features.skills_list.delete_skill_dialog import ConfirmDeleteSkill
 from appmain.features.skills_list.rename_skill_dialog import RenameSkill
 from PyQt6.QtWidgets import (
     QApplication,
     QWidget,
-    QLabel,
     QPushButton,
     QVBoxLayout,
     QMenu,
     QHBoxLayout,
-    QMessageBox,
     QListWidget,
     QListWidgetItem,
     QDialog,
 )
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QAction
 
 
 class SkillsListUI(QWidget):

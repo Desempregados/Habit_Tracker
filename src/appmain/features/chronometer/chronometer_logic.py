@@ -3,7 +3,9 @@ from PyQt6.QtCore import (
     QTimer,
     QObject,
 )
-from appmain.database.database import *
+from appmain.database.create import db_add_registry
+from appmain.database.update import db_add_goal_value
+
 
 
 class ChronometerLogic(QObject):

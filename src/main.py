@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QApplication
 from appmain.main_window.main_window import MainWindow
-from appmain.database.database import db_create
+from appmain.database.creater import db_create
 import sys
 
 

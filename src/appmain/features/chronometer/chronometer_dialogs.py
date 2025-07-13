@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import (
     QComboBox,
 )
 from PyQt6.QtCore import Qt
-from appmain.database.database import db_read_goal_by_skill
+from appmain.database.read import db_read_goal_by_skill
 
 
 class RestartChronometerDialog(QDialog):

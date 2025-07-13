@@ -12,7 +12,9 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt
 from appmain.features.goals.container_goal import ContainerGoal
-from appmain.database.database import *
+from pathlib import Path
+from appmain.database.create import db_create_goal
+from appmain.database.read import db_obtain_skill_by_id, db_read_goal_by_skill, db_obtain_dedicated_time
 from appmain.features.goals.goals_dialog import NewGoalDialog
 
 

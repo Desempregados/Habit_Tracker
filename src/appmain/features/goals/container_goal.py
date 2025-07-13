@@ -12,7 +12,9 @@ from PyQt6.QtWidgets import (
 
 from PyQt6.QtCore import Qt, pyqtSignal
 from appmain.common.clickable_label import ClickableLabel
-from appmain.database.database import *
+from pathlib import Path
+from appmain.database.read import db_read_goal_current_value, db_read_goal_name, db_read_goal_value
+from appmain.database.delete import db_delete_goal
 
 
 class ContainerGoal(QWidget):
