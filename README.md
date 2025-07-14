@@ -7,5 +7,6 @@
 
 1. ~~dividir a database em arquivos baseado nos comments ~~ Art~~
 2. reutilizar o qss das metas no timer ~~ Art
-4. Linkar as features
-6. Pagina de Inicio
+3. Linkar as features
+4. Pagina de Inicio
+5. Adicionar qss em todas as caixas de dialogo ~~ Greeze
