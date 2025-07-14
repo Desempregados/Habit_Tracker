@@ -3,19 +3,31 @@ from PyQt6.QtGui import QFontDatabase, QIcon
 from appmain.features.skill_master.skills_master_widget import SkillsMaster
 from appmain.database.create import db_create
 from appmain.assets import get_path_asset
+from pathlib import Path
 import sys
 
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setObjectName("MainWindow")
+
         self.setWindowTitle("Skills Tracker")
         self.SKILLS_MASTER = SkillsMaster()
         self.setCentralWidget(self.SKILLS_MASTER)
         self.fonts = {}
         self.load_fonts()
-        self.setStyleSheet("background-color:rgb(30,30,30);")
         self.load_icon()
+
+        self.Load_qss()
+
+    # ====================== Load qss ==================================
+
+    def Load_qss(self):
+        STYLE_DIR = Path(__file__).resolve().parent / "main_window.qss"
+        with open(STYLE_DIR, "r", encoding="UTF-8") as f:
+            style_qss = f.read()
+            self.setStyleSheet(style_qss)
 
     def load_fonts(self):
         fonts_to_load = ["Roboto.ttf", "UbuntuNerd.ttf"]

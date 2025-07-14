@@ -28,6 +28,9 @@ class CSpinBox(QSpinBox):
             self.scrolldown.emit()
         event.accept()
 
+    def textFromValue(self, value: int) -> str:
+        return f"{value:02d}"
+
 
 class CustomSpinBoxWidget(QWidget):
     def __init__(self, parent=None):

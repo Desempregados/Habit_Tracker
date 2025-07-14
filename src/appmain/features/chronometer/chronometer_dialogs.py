@@ -10,15 +10,17 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt
 from appmain.database.read import db_read_goal_by_skill
+from pathlib import Path
 
 
 class RestartChronometerDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setObjectName("RestartDialog")
         self.layout_main = QVBoxLayout(self)
         self.layout_main.addStretch(1)
 
-        self.label_ask = QLabel("Submit before restart?")
+        self.label_ask = QLabel("Restart Without Submit?")
         self.label_ask.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layout_main.addWidget(self.label_ask)
 
@@ -26,26 +28,26 @@ class RestartChronometerDialog(QDialog):
         self.layout_main.addLayout(self.layout_buttons)
         self.layout_buttons.addStretch(1)
 
-        self.button_yes = QPushButton("Yes")
+        self.button_yes = QPushButton("")
+        self.button_yes.setObjectName("button_yes")
         self.layout_buttons.addWidget(self.button_yes)
+        self.layout_buttons.addStretch(1)
 
-        self.button_no = QPushButton("No")
+        self.button_no = QPushButton("")
+        self.button_no.setObjectName("button_no")
         self.layout_buttons.addWidget(self.button_no)
-
-        self.button_cancel = QPushButton("Cancel")
-        self.layout_buttons.addWidget(self.button_cancel)
 
         self.layout_buttons.addStretch(1)
         self.layout_main.addStretch(1)
 
         self.button_yes.clicked.connect(self.accept)
         self.button_no.clicked.connect(self.reject)
-        self.button_cancel.clicked.connect(lambda: self.done(2))
 
 
 class SubmitChronometerDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setObjectName("SubmitDialog")
         self.goal_id = -1
         self.layout_main = QVBoxLayout(self)
         self.layout_main.addStretch(1)
@@ -59,6 +61,7 @@ class SubmitChronometerDialog(QDialog):
         # ================ Combo box goals ======================
 
         self.combo_box_goals = QComboBox()
+        self.combo_box_goals.setObjectName("combo_box_goals")
         self.layout_main.addWidget(self.combo_box_goals)
         self.combo_box_goals.addItem("no goal", -1)
 
@@ -70,12 +73,15 @@ class SubmitChronometerDialog(QDialog):
 
         # ================ Button yes ============================
 
-        self.button_yes = QPushButton("Yes")
+        self.button_yes = QPushButton("")
+        self.button_yes.setObjectName("button_yes")
         self.layout_buttons.addWidget(self.button_yes)
+        self.layout_buttons.addStretch(1)
 
         # ================ Button no ============================
 
-        self.button_no = QPushButton("No")
+        self.button_no = QPushButton("")
+        self.button_no.setObjectName("button_no")
         self.layout_buttons.addWidget(self.button_no)
 
         self.layout_buttons.addStretch(1)
@@ -85,6 +91,16 @@ class SubmitChronometerDialog(QDialog):
 
         self.button_yes.clicked.connect(self.accept_action)
         self.button_no.clicked.connect(self.reject)
+
+        self.Load_qss()
+
+    # ====================== Load qss ==================================
+
+    def Load_qss(self):
+        STYLE_DIR = Path(__file__).resolve().parent / "style_skill.qss"
+        with open(STYLE_DIR, "r", encoding="UTF-8") as f:
+            style_qss = f.read()
+            self.setStyleSheet(style_qss)
 
     def load_goals(self, skill_id: int):
         goals = db_read_goal_by_skill(skill_id)
@@ -99,7 +115,7 @@ class SubmitChronometerDialog(QDialog):
 
 def main():
     app = QApplication(sys.argv)
-    window = SubmitChronometerDialog()
+    window = RestartChronometerDialog()
     window.show()
     sys.exit(app.exec())
 

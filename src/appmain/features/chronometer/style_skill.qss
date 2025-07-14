@@ -75,3 +75,100 @@
 	color: white;
 	font-weight: bold;
 }
+
+#SubmitDialog {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#SubmitDialog QLabel {
+	font-family: 'Roboto';
+	font-weight: 600;
+	font-size: 24px;
+	color: rgba(200, 130, 255, 1);
+}
+
+#SubmitDialog QComboBox#combo_box_goals {
+	background-color: rgba(70, 70, 70, 1);
+	font-family: 'Roboto';
+	font-weight: 500;
+	font-size: 20px;
+	color: white;
+	border: 1px solid rgba(0, 255, 159, 1);
+	border-radius: 10px;
+	text-align: center;
+}
+
+#SubmitDialog QComboBox#combo_box_goals::drop-down {
+	background-color: transparent;
+	border: none;
+	border-radius: 10px;
+	text-align: center;
+}
+
+#SubmitDialog QComboBox#combo_box_goals QAbstractItemView {
+	background-color: rgba(70, 70, 70, 1);
+	border: 1px solid rgba(0, 255, 159, 1);
+	border-radius: 10px;
+	selection-background-color: rgba(100, 100, 100, 1);
+	text-align: center;
+}
+
+#SubmitDialog QComboBox#combo_box_goals::item:selected {
+	background-color: rgba(0, 255, 159, 0.4);
+	border: 1px solid rgba(0, 255, 159, 1);
+}
+
+#SubmitDialog QPushButton {
+	font-family: 'Ubuntu Nerd Font';
+	font-size: 24px;
+	background-color: transparent;
+	border: none;
+	color: white
+}
+
+#SubmitDialog QPushButton#button_yes:hover {
+	color: rgba(0, 255, 159, 0.8);
+}
+
+#SubmitDialog QPushButton#button_yes:pressed {
+	color: rgba(0, 255, 159, 1);
+}
+
+#SubmitDialog QPushButton#button_no:hover {
+	color: rgba(240, 100, 100, 0.8);
+}
+
+#SubmitDialog QPushButton#button_no:pressed {
+	color: rgba(240, 100, 100, 1);
+}
+
+#RestartDialog QLabel {
+	font-family: 'Roboto';
+	font-weight: 600;
+	color: rgba(200, 130, 255, 1);
+	font-size: 30px;
+}
+
+#RestartDialog QPushButton {
+	font-family: 'Ubuntu Nerd Font';
+	font-size: 24px;
+	background-color: transparent;
+	border: none;
+	color: white
+}
+
+#RestartDialog QPushButton#button_yes:hover {
+	color: rgba(0, 255, 159, 0.8);
+}
+
+#RestartDialog QPushButton#button_yes:pressed {
+	color: rgba(0, 255, 159, 1);
+}
+
+#RestartDialog QPushButton#button_no:hover {
+	color: rgba(240, 100, 100, 0.8);
+}
+
+#RestartDialog QPushButton#button_no:pressed {
+	color: rgba(240, 100, 100, 1);
+}

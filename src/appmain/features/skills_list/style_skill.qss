@@ -60,6 +60,166 @@
 	color: rgba(0, 255, 159, 1);
 }
 
+#SkillsListUI QMenu {
+	background-color: rgba(60, 60, 60, 1);
+	font-weight: bold;
+	color: white;
+}
+
+#SkillsListUI QMenu::item:selected {
+	background-color: rgba(50, 50, 50, 1);
+}
+
 #SkillsListUI QPushButton#button_create:pressed {
 	color: rgba(0, 255, 159, 0.75);
+}
+
+#CreateSkillDialog {
+	background-color: rgba(40, 40, 40, 1);
+}
+
+#CreateSkillDialog QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#CreateSkillDialog QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
+	font-size: 24px;
+	background-color: transparent;
+	color: white;
+}
+
+#CreateSkillDialog QLineEdit {
+	background-color: transparent;
+	border: 2px solid rgba(0, 255, 159, 1);
+	border-radius: 10px;
+	color: rgba(200, 130, 255, 1);
+	font-family: 'Roboto';
+	font-size: 18px;
+	qproperty-alignment: 'AlignCenter';
+	font-weight: 600;
+}
+
+#CreateSkillDialog QPushButton {
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 20px;
+}
+
+#CreateSkillDialog QPushButton#button_new:hover {
+	color: rgba(0, 255, 159, 0.8);
+}
+
+#CreateSkillDialog QPushButton#button_cancel:hover {
+	color: rgba(245, 100, 100, 0.8);
+}
+
+#CreateSkillDialog QPushButton#button_new:pressed {
+	color: rgba(0, 255, 159, 1);
+}
+
+#CreateSkillDialog QPushButton#button_cancel:pressed {
+	color: rgba(245, 100, 100, 1);
+}
+
+#RenameSkillDialog {
+	background-color: rgba(40, 40, 40, 1);
+}
+
+#RenameSkillDialog QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#RenameSkillDialog QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
+	font-size: 24px;
+	background-color: transparent;
+	color: white;
+}
+
+#RenameSkillDialog QLineEdit {
+	background-color: transparent;
+	border: 2px solid rgba(0, 255, 159, 1);
+	border-radius: 10px;
+	color: rgba(200, 130, 255, 1);
+	font-family: 'Roboto';
+	font-size: 18px;
+	qproperty-alignment: 'AlignCenter';
+	font-weight: 600;
+}
+
+#RenameSkillDialog QPushButton {
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 20px;
+}
+
+#RenameSkillDialog QPushButton#button_confirm:hover {
+	color: rgba(0, 255, 159, 0.8);
+}
+
+#RenameSkillDialog QPushButton#button_cancel:hover {
+	color: rgba(245, 100, 100, 0.8);
+}
+
+#RenameSkillDialog QPushButton#button_confirm:pressed {
+	color: rgba(0, 255, 159, 1);
+}
+
+#RenameSkillDialog QPushButton#button_cancel:pressed {
+	color: rgba(245, 100, 100, 1);
+}
+
+#DeleteSkillDialog {
+	background-color: rgba(40, 40, 40, 1);
+}
+
+#DeleteSkillDialog QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#DeleteSkillDialog QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
+	font-size: 24px;
+	background-color: transparent;
+	color: white;
+}
+
+#DeleteSkillDialog QLineEdit {
+	background-color: transparent;
+	border: 2px solid rgba(0, 255, 159, 1);
+	border-radius: 10px;
+	color: rgba(200, 130, 255, 1);
+	font-family: 'Roboto';
+	font-size: 18px;
+	qproperty-alignment: 'AlignCenter';
+	font-weight: 600;
+}
+
+#DeleteSkillDialog QPushButton {
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 20px;
+}
+
+#DeleteSkillDialog QPushButton#button_yes:hover {
+	color: rgba(0, 255, 159, 0.8);
+}
+
+#DeleteSkillDialog QPushButton#button_no:hover {
+	color: rgba(245, 100, 100, 0.8);
+}
+
+#DeleteSkillDialog QPushButton#button_yes:pressed {
+	color: rgba(0, 255, 159, 1);
+}
+
+#DeleteSkillDialog QPushButton#button_no:pressed {
+	color: rgba(245, 100, 100, 1);
 }

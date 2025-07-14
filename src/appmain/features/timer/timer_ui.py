@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import QTimer
 
-from timer_logic import TimerLogic
+from appmain.features.timer.timer_logic import TimerLogic
 
 
 class TimeSelectorWidget(QWidget):

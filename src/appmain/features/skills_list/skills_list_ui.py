@@ -61,6 +61,7 @@ class SkillsListUI(QWidget):
         self.list_widget.currentItemChanged.connect(self.get_current_item_id)
         self.load_skills()
         self.Load_stylesheet()
+        self.menu = QMenu(self)
 
     def Load_stylesheet(self):
         STYLE_DIR = Path(__file__).resolve().parent / "style_skill.qss"

@@ -157,3 +157,43 @@
 	color: white;
 	font-size: 34px;
 }
+
+#NewGoalDialog QLineEdit {
+	background-color: transparent;
+	border: 1px solid rgb(70, 70, 70);
+	border-radius: 10px;
+	font-weight: 600;
+	font-family: 'Roboto';
+	font-size: 20px;
+	color: white;
+	qproperty-alignment: 'AlignCenter';
+}
+
+#NewGoalDialog QLineEdit:hover {
+	border: 1px solid rgba(200, 130, 255, 1);
+	border-radius: 10px;
+}
+
+#NewGoalDialog QPushButton {
+	font-family: 'Ubuntu Nerd Font';
+	background-color: transparent;
+	border: none;
+	font-size: 20px;
+	color: white;
+}
+
+#NewGoalDialog QPushButton#button_confirm:hover {
+	color: rgba(0, 255, 139, 0.8);
+}
+
+#NewGoalDialog QPushButton#button_confirm:pressed {
+	color: rgba(0, 255, 139, 1);
+}
+
+#NewGoalDialog QPushButton#button_cancel:hover {
+	color: rgba(200, 130, 255, 0.8);
+}
+
+#NewGoalDialog QPushButton#button_cancel:pressed {
+	color: rgba(200, 130, 255, 1);
+}

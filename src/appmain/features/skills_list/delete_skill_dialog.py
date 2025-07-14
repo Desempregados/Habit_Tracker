@@ -14,16 +14,20 @@ class ConfirmDeleteSkill(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.layout_main = QVBoxLayout(self)
+        self.setObjectName("DeleteSkillDialog")
 
         self.label_confim = QLabel("Delete skill permanently?")
+        self.label_confim.setObjectName("label_confirm")
         self.label_confim.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layout_main.addWidget(self.label_confim)
 
         self.layout_buttons = QHBoxLayout()
         self.layout_main.addLayout(self.layout_buttons)
 
-        self.button_confirm = QPushButton("Yes")
-        self.button_cancel = QPushButton("No")
+        self.button_confirm = QPushButton("")
+        self.button_confirm.setObjectName("button_yes")
+        self.button_cancel = QPushButton("")
+        self.button_cancel.setObjectName("button_no")
         self.layout_buttons.addWidget(self.button_confirm)
         self.layout_buttons.addWidget(self.button_cancel)
 

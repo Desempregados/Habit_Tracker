@@ -64,13 +64,15 @@ class NewGoalDialog(QDialog):
 
         # ===================== Button confirm =====================
 
-        self.button_confirm = QPushButton("confirm")
+        self.button_confirm = QPushButton("")
+        self.button_confirm.setObjectName("button_confirm")
         self.layout_buttons.addWidget(self.button_confirm)
         self.button_confirm.clicked.connect(lambda: self.check_accept())
 
         # ====================== Button cancel ======================
 
-        self.button_cancel = QPushButton("cancel")
+        self.button_cancel = QPushButton("")
+        self.button_cancel.setObjectName("button_cancel")
         self.layout_buttons.addWidget(self.button_cancel)
         self.layout_buttons.addStretch(1)
         self.button_cancel.clicked.connect(self.reject)
