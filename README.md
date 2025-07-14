@@ -5,9 +5,9 @@
 
 ##Tasks:
 
-[ ] - ~~dividir a database em arquivos baseado nos comments ~~ Art~~
-[ ] - reutilizar o qss das metas no timer ~~ Art
-[ ] - Linkar as features
-[ ] - Pagina de Inicio
-[ ] - Adicionar qss em todas as caixas de dialogo ~~ Greeze
-[ ] - Adicionar a feature de editar um goal e editar mais informações da skill ~~ Greeze
+- [X]  ~~dividir a database em arquivos baseado nos comments ~~ Art~~
+- [ ]  reutilizar o qss das metas no timer ~~ Art
+- [ ]  Linkar as features
+- [ ]  Pagina de Inicio
+- [X]  Adicionar qss em todas as caixas de dialogo ~~ Greeze
+- [ ]  Adicionar a feature de editar um goal e editar mais informações da skill ~~ Greeze
