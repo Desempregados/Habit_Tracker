@@ -3,7 +3,7 @@
 ## Developed By zGreezze && 4rtx
 
 
-##Tasks:
+### Tasks:
 
 - [X]  ~~dividir a database em arquivos baseado nos comments ~~ Art~~
 - [ ]  reutilizar o qss das metas no timer ~~ Art
