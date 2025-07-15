@@ -2,7 +2,7 @@ import sqlite3
 from datetime import date, timedelta
 
 from pathlib import Path
-import sqlite3
+
 
 def _connection_boilerplate(conn: sqlite3.Connection) -> None:
     conn.execute("PRAGMA foreign_keys = ON;")
@@ -274,3 +274,26 @@ def db_read_goal_actives() -> list:
         print(e)
         return []
 
+
+def db_real_all_goals() -> list:
+    db_path = obtain_path_db()
+
+    try:
+        with sqlite3.connect(db_path) as conn:
+            _connection_boilerplate(conn)
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT id
+                FROM goals
+                ORDER BY (CAST(current_value AS REAL) / goal_value) ASC""")
+            goals = cursor.fetchall()
+    except sqlite3.Error as e:
+        print(e)
+
+    return goals
+
+
+if __name__ == "__main__":
+    goals = db_real_all_goals()
+    for a in goals:
+        print(a["id"])
