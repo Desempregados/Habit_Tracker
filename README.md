@@ -7,7 +7,7 @@
 
 - [ ] Homepage
 	- [x] Mostrar goals incompletos ~~ Greeze
-	- [ ] Heatmaps dos registros ~~ Greeze
+	- [x] Heatmaps dos registros ~~ Greeze
 	- [ ] Progresso do dia
 	- [ ] Botão para ir pra lista de skills
 	- [ ] Linkar com a tela principal
