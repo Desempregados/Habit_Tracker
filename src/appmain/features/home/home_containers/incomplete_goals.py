@@ -57,6 +57,7 @@ class IncompleteGoals(QWidget):
         super().__init__(parent)
         self.layout_main = QVBoxLayout(self)
         self.setStyleSheet("background-color:rgb(130,130,130);")
+        self.containers = []
 
         # ================================ Label Goals ========================
 
@@ -77,6 +78,7 @@ class IncompleteGoals(QWidget):
         self.layout_main.addWidget(self.scroll_area)
 
         self.insert_goals()
+        self.resizeEvent(None)
 
     def insert_goals(self):
         goals = db_real_all_goals()
@@ -84,6 +86,16 @@ class IncompleteGoals(QWidget):
             id = goal["id"]
             container = ContainerGoal(id)
             self.layout_scroll.addWidget(container)
+            self.containers.append(container)
+
+    def resizeEvent(self, event):
+        viewport_height = self.scroll_area.viewport().height()
+        if self.containers:
+            target_height = viewport_height / 5.5
+            for container in self.containers:
+                container.setMinimumHeight(int(target_height))
+
+        super().resizeEvent(event)
 
 
 def main():

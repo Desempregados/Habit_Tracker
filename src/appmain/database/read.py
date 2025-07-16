@@ -1,5 +1,5 @@
 import sqlite3
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 from pathlib import Path
 
@@ -104,6 +104,25 @@ def db_obtain_dedicated_time(skill_id: int) -> int:
     except sqlite3.Error as e:
         print(e)
         return -1
+
+
+def db_obtain_all_registries() -> list:
+    db_path = obtain_path_db()
+    skills = []
+
+    try:
+        with sqlite3.connect(db_path) as conn:
+            _connection_boilerplate(conn)
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT id, skill_id, registry_time, dedicated_time
+                FROM registries
+                ORDER BY registry_time ASC""")
+            skills = cursor.fetchall()
+    except sqlite3.Error as e:
+        print(e)
+
+    return skills
 
 
 def db_read_goal_status(goal_id: int) -> str:
@@ -294,6 +313,9 @@ def db_real_all_goals() -> list:
 
 
 if __name__ == "__main__":
-    goals = db_real_all_goals()
+    goals = db_obtain_all_registries()
+    formato = "%Y-%m-%d"
     for a in goals:
-        print(a["id"])
+        dia = a["registry_time"]
+        dia_formatado = datetime.strptime(dia, formato)
+        print(dia_formatado.day)
