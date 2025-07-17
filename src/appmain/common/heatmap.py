@@ -10,7 +10,7 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtGui import QColor, QBrush
 from PyQt6.QtCore import Qt
 from datetime import datetime
-from appmain.database.read import db_obtain_all_registries
+from appmain.database.read import db_obtain_all_registries_info
 
 
 class Heatmap(QTableWidget):
@@ -74,7 +74,7 @@ class Heatmap(QTableWidget):
         self.initColors(month, year)
 
     def initColors(self, month, year):
-        registries = db_obtain_all_registries()
+        registries = db_obtain_all_registries_info()
         days = {}
         total_time = 0
 
@@ -82,7 +82,7 @@ class Heatmap(QTableWidget):
             day = registry["registry_time"]
             time = registry["dedicated_time"]
 
-            formated_time = datetime.strptime(day, "%Y-%m-%d")
+            formated_time = datetime.strptime(day, "%Y-%m-%d %H:%M:%S")
 
             if (formated_time.month == month) and (formated_time.year == year):
                 total_time += time

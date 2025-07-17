@@ -1,5 +1,5 @@
 import sqlite3
-from datetime import date, timedelta, datetime
+from datetime import date, timedelta
 
 from pathlib import Path
 
@@ -106,7 +106,7 @@ def db_obtain_dedicated_time(skill_id: int) -> int:
         return -1
 
 
-def db_obtain_all_registries() -> list:
+def db_obtain_all_registries_info() -> list:
     db_path = obtain_path_db()
     skills = []
 
@@ -119,6 +119,55 @@ def db_obtain_all_registries() -> list:
                 FROM registries
                 ORDER BY registry_time ASC""")
             skills = cursor.fetchall()
+    except sqlite3.Error as e:
+        print(e)
+
+    return skills
+
+
+def db_obtain_all_registries_id() -> list[int]:
+    db_path = obtain_path_db()
+    id_int = []
+
+    try:
+        with sqlite3.connect(db_path) as conn:
+            _connection_boilerplate(conn)
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT id
+                FROM registries
+                ORDER BY registry_time DESC""")
+            registries_id = cursor.fetchall()
+
+            for registry in registries_id:
+                id_int.append(registry["id"])
+
+    except sqlite3.Error as e:
+        print(e)
+
+    return id_int
+
+
+def db_read_registry_info(registry_id) -> list:
+    db_path = obtain_path_db()
+    skills = []
+    param = (registry_id,)
+
+    try:
+        with sqlite3.connect(db_path) as conn:
+            _connection_boilerplate(conn)
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                SELECT skill_id, registry_time, dedicated_time, goal_id
+                FROM registries
+                WHERE id = ?
+                """,
+                param,
+            )
+            skills = cursor.fetchall()
+            if len(skills) == 0:
+                raise Exception("Non existent registry")
     except sqlite3.Error as e:
         print(e)
 
@@ -313,9 +362,5 @@ def db_real_all_goals() -> list:
 
 
 if __name__ == "__main__":
-    goals = db_obtain_all_registries()
-    formato = "%Y-%m-%d"
-    for a in goals:
-        dia = a["registry_time"]
-        dia_formatado = datetime.strptime(dia, formato)
-        print(dia_formatado.day)
+    print(db_obtain_all_registries_id())
+    pass

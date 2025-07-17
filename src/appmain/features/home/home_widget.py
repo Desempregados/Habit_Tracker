@@ -2,6 +2,7 @@ import sys
 from PyQt6.QtWidgets import QWidget, QApplication, QVBoxLayout, QHBoxLayout
 from appmain.features.home.home_containers.incomplete_goals import IncompleteGoals
 from appmain.features.home.home_containers.heatmap import MonthHeatmap
+from appmain.features.home.home_containers.today_activities import TodayActivities
 
 
 class Home(QWidget):
@@ -16,10 +17,11 @@ class Home(QWidget):
         # ================================ Botton widgets =====================
 
         self.layout_bottom = QHBoxLayout()
-        self.layout_main.addLayout(self.layout_bottom)
+        self.layout_main.addLayout(self.layout_bottom, stretch=1)
         self.INCOMPLETEGOALS = IncompleteGoals()
         self.layout_bottom.addWidget(self.INCOMPLETEGOALS, stretch=1)
-        self.layout_bottom.addStretch(1)
+        self.TODAYACTIVITIES = TodayActivities()
+        self.layout_bottom.addWidget(self.TODAYACTIVITIES, stretch=1)
 
         self.MONTHHEATMAP = MonthHeatmap()
         self.layout_bottom.addWidget(self.MONTHHEATMAP, stretch=1)

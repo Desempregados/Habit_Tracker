@@ -8,7 +8,7 @@
 - [ ] Homepage
 	- [x] Mostrar goals incompletos ~~ Greeze
 	- [x] Heatmaps dos registros ~~ Greeze
-	- [ ] Progresso do dia
+	- [x] Progresso do dia
 	- [ ] Botão para ir pra lista de skills
 	- [ ] Linkar com a tela principal
 	- [ ] Aplicar qss na homepage

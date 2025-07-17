@@ -44,7 +44,6 @@ class ContainerGoal(QWidget):
         current_value = db_read_goal_current_value(self.goal_id)
         goal_value = db_read_goal_value(self.goal_id)
         progress = int((current_value / goal_value) * 100)
-        print(progress)
 
         self.label_name.setText(goal_name)
         self.progress_bar.setValue(progress)
@@ -87,6 +86,7 @@ class IncompleteGoals(QWidget):
             container = ContainerGoal(id)
             self.layout_scroll.addWidget(container)
             self.containers.append(container)
+        self.layout_scroll.addStretch(1)
 
     def resizeEvent(self, event):
         viewport_height = self.scroll_area.viewport().height()

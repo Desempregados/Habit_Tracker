@@ -157,7 +157,7 @@ class GoalsUI(QWidget):
 def main():
     app = QApplication(sys.argv)
     window = GoalsUI()
-    window.load_skill_data(2)
+    window.load_skill_data(18)
     window.show()
     sys.exit(app.exec())
 

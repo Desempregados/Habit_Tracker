@@ -203,9 +203,7 @@ class ChronometerUI(QWidget):
 
         if result == QDialog.DialogCode.Accepted:
             goal_id = dialog.goal_id
-            if goal_id != -1:
-                self.CHRONOMETER_LOGIC.add_time_to_goal(goal_id)
-            self.CHRONOMETER_LOGIC.submit_time()
+            self.CHRONOMETER_LOGIC.submit_time(goal_id)
             self.button_restart.setEnabled(False)
             self.button_submit.setEnabled(False)
             self.reset_timer()
@@ -221,7 +219,7 @@ class ChronometerUI(QWidget):
     def form_time(self, s: int) -> str:
         return f"{int(s // 3600):02d}:{int((s // 60) % 60):02d}:{int(s % 60):02d}"
 
-    # ============================ Click label actions =============================
+    # ============================ Click label actions ========================
 
     def click_label(self):
         self.label_mode += 1
@@ -229,7 +227,7 @@ class ChronometerUI(QWidget):
             self.CHRONOMETER_LOGIC.current_time
         )
 
-    # ============================ Reset timer ======================================
+    # ============================ Reset timer ================================
 
     def reset_timer(self):
         self.label_mode = 0
@@ -239,7 +237,7 @@ class ChronometerUI(QWidget):
 def main():
     app = QApplication(sys.argv)
     window = ChronometerUI()
-    window.load_skill_id(2)
+    window.load_skill_id(18)
     window.show()
     sys.exit(app.exec())
 

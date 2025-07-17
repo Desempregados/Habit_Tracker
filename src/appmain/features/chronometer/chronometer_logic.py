@@ -4,8 +4,7 @@ from PyQt6.QtCore import (
     QObject,
 )
 from appmain.database.create import db_add_registry
-from appmain.database.update import db_add_goal_value
-
+from appmain.database.update import db_update_goal_value, db_update_complete_goals
 
 
 class ChronometerLogic(QObject):
@@ -39,9 +38,8 @@ class ChronometerLogic(QObject):
         self.current_time = 0
         self.signal_update_timer.emit(self.form_time(self.current_time))
 
-    def submit_time(self):
-        db_add_registry(self.working_id, self.current_time)
+    def submit_time(self, goal_id: int = 0):
+        db_add_registry(self.working_id, self.current_time, goal_id)
+        db_update_goal_value(goal_id)
+        db_update_complete_goals()
         self.restart_timer()
-
-    def add_time_to_goal(self, goal_id: int):
-        db_add_goal_value(goal_id, self.current_time)

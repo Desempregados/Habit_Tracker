@@ -48,7 +48,7 @@ class SubmitChronometerDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setObjectName("SubmitDialog")
-        self.goal_id = -1
+        self.goal_id = 0
         self.layout_main = QVBoxLayout(self)
         self.layout_main.addStretch(1)
 
@@ -63,7 +63,7 @@ class SubmitChronometerDialog(QDialog):
         self.combo_box_goals = QComboBox()
         self.combo_box_goals.setObjectName("combo_box_goals")
         self.layout_main.addWidget(self.combo_box_goals)
-        self.combo_box_goals.addItem("no goal", -1)
+        self.combo_box_goals.addItem("no goal", 0)
 
         # ================ Layout buttons =======================
 
@@ -115,7 +115,8 @@ class SubmitChronometerDialog(QDialog):
 
 def main():
     app = QApplication(sys.argv)
-    window = RestartChronometerDialog()
+    window = SubmitChronometerDialog()
+    window.load_goals(18)
     window.show()
     sys.exit(app.exec())
 

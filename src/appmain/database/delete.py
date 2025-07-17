@@ -1,7 +1,7 @@
 import sqlite3
 
 from pathlib import Path
-import sqlite3
+
 
 def _connection_boilerplate(conn: sqlite3.Connection) -> None:
     conn.execute("PRAGMA foreign_keys = ON;")
@@ -15,7 +15,6 @@ def obtain_path_db() -> Path:
     data_dir.mkdir(parents=True, exist_ok=True)
 
     return data_dir / DB_FILE
-
 
 
 def db_delete_skill(skill_id: int) -> bool:
@@ -76,3 +75,5 @@ def db_delete_table(table_name: str) -> bool:
         return False
 
 
+if __name__ == "__main__":
+    pass

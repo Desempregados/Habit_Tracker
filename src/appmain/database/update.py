@@ -2,7 +2,7 @@ import sqlite3
 from datetime import date
 
 from pathlib import Path
-import sqlite3
+
 
 def _connection_boilerplate(conn: sqlite3.Connection) -> None:
     conn.execute("PRAGMA foreign_keys = ON;")
@@ -118,3 +118,55 @@ def db_add_goal_value(goal_id: int, value: int) -> bool:
         print(e)
         return False
 
+
+def db_update_complete_goals() -> bool:
+    db_path = obtain_path_db()
+    try:
+        with sqlite3.connect(db_path) as conn:
+            _connection_boilerplate(conn)
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+            UPDATE goals SET status = 'completed' WHERE current_value >= goal_value
+            """,
+            )
+            conn.commit()
+            return True
+    except sqlite3.Error as e:
+        print(e)
+        return False
+
+
+def db_update_goal_value(goal_id: int) -> bool:
+    db_path = obtain_path_db()
+    param = (goal_id,)
+    try:
+        with sqlite3.connect(db_path) as conn:
+            _connection_boilerplate(conn)
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+            SELECT SUM(dedicated_time) FROM registries WHERE goal_id = ?
+            """,
+                param,
+            )
+            result = cursor.fetchone()
+            value = result[0]
+            print(value)
+
+            params = (value, goal_id)
+            cursor.execute(
+                """
+            UPDATE goals SET current_value = ? WHERE id = ?
+            """,
+                params,
+            )
+            conn.commit()
+            return True
+    except sqlite3.Error as e:
+        print(e)
+        return False
+
+
+if __name__ == "__main__":
+    print(db_update_complete_goals())

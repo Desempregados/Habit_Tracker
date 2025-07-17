@@ -1,8 +1,7 @@
 import sqlite3
-from datetime import date, timedelta
-# CREATE
+from datetime import date, timedelta, datetime
 from pathlib import Path
-import sqlite3
+
 
 def _connection_boilerplate(conn: sqlite3.Connection) -> None:
     conn.execute("PRAGMA foreign_keys = ON;")
@@ -40,10 +39,12 @@ def db_create() -> bool:
 
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             skill_id INTEGER NOT NULL,
+            goal_id INTEGER NOT NULL,
             registry_time TEXT NOT NULL,
             dedicated_time INTEGER DEFAULT 0,
 
-            FOREIGN KEY (skill_id) REFERENCES skills (id) ON DELETE CASCADE
+            FOREIGN KEY (skill_id) REFERENCES skills (id) ON DELETE CASCADE,
+            FOREIGN KEY (goal_id) REFERENCES goals (id) ON DELETE CASCADE
             );
             """)
 
@@ -85,8 +86,10 @@ def db_create_skill(skill_name: str) -> bool:
     if not skill_name.strip():
         return False
 
+    date = datetime.now()
+    form_date = date.strftime("%Y-%m-%d %H:%M:%S")
     db_path = obtain_path_db()
-    params = (skill_name.strip(), str(date.today()))
+    params = (skill_name.strip(), str(form_date))
 
     try:
         with sqlite3.connect(db_path) as conn:
@@ -103,8 +106,10 @@ def db_create_skill(skill_name: str) -> bool:
         return False
 
 
-def db_add_registry(skill_id: int, dedicated_time: int = 0) -> bool:
-    params = (skill_id, str(date.today()), dedicated_time)
+def db_add_registry(skill_id: int, dedicated_time: int = 0, goal_id: int = 0) -> bool:
+    date = datetime.now()
+    form_date = date.strftime("%Y-%m-%d %H:%M:%S")
+    params = (skill_id, str(form_date), dedicated_time, goal_id)
     db_path = obtain_path_db()
     try:
         with sqlite3.connect(db_path) as conn:
@@ -112,8 +117,8 @@ def db_add_registry(skill_id: int, dedicated_time: int = 0) -> bool:
             cursor = conn.cursor()
             cursor.execute(
                 """
-            INSERT INTO registries  (skill_id, registry_time, dedicated_time)
-            VALUES (?, ?, ?)
+            INSERT INTO registries  (skill_id, registry_time, dedicated_time, goal_id)
+            VALUES (?, ?, ?, ?)
             """,
                 params,
             )
@@ -164,3 +169,7 @@ def db_create_goal(
     except sqlite3.Error as e:
         print(e)
         return False
+
+
+if __name__ == "__main__":
+    db_create()
