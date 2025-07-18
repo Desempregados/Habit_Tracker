@@ -11,7 +11,7 @@ from PyQt6.QtWidgets import (
     QGridLayout,
 )
 from PyQt6.QtCore import Qt
-from appmain.features.goals.container_goal import ContainerGoal
+from appmain.features.goals.container_goal import ContainerGoalTime
 from pathlib import Path
 from appmain.database.create import db_create_goal
 from appmain.database.read import (
@@ -117,7 +117,7 @@ class GoalsUI(QWidget):
 
         for goal in goals_list:
             goal_id = goal["id"]
-            container = ContainerGoal(goal_id)
+            container = ContainerGoalTime(goal_id)
             container.goal_deleted.connect(lambda: self.load_skill_data(self.skill_id))
             self.layout_scroll_area.addWidget(container)
 

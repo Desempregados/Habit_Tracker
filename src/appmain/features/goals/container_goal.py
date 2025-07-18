@@ -21,7 +21,7 @@ from appmain.database.read import (
 from appmain.database.delete import db_delete_goal
 
 
-class ContainerGoal(QWidget):
+class ContainerGoalTime(QWidget):
     goal_deleted = pyqtSignal()
 
     def __init__(self, goal_id=None, parent=None):
@@ -144,8 +144,8 @@ class ContainerGoal(QWidget):
 
 def main():
     app = QApplication(sys.argv)
-    window = ContainerGoal()
-    window.load_goal_data(1)
+    window = ContainerGoalTime()
+    window.load_goal_data(4)
     window.show()
     sys.exit(app.exec())
 
