@@ -11,6 +11,21 @@
 	font-weight: 700;
 }
 
+#button_back {
+	background-color: transparent;
+	color: rgba(0, 255, 159, 0.8);
+	border: none;
+	font-size: 60px;
+}
+
+#button_back:hover {
+	color: rgba(0, 255, 159, 1);
+}
+
+#button_back:pressed {
+	color: rgba(0, 255, 159, 0.6);
+}
+
 #SkillsListUI QListWidget#list_widget {
 	font-size: 30px;
 	background-color: rgba(30, 30, 30, 1);

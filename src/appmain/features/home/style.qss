@@ -1,0 +1,157 @@
+#Home {
+	background-color: rgba(30, 30, 30, 1);
+	font-family: "Outfit", "JetBrainsMono Nerd Font";
+}
+
+#Home QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#Home QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
+}
+
+#label_home {
+	color: rgba(0, 240, 139, 1);
+	font-size: 34px;
+}
+
+#button_skills {
+	color: rgba(0, 240, 139, 1);
+	font-size: 150px;
+	border: none;
+}
+
+#button_skills:hover {
+	color: rgba(200, 130, 255, 1);
+	font-size: 150px;
+	border: none;
+}
+
+#button_skills:pressed {
+	color: #FFD640;
+}
+
+#label_skills {
+	color: white;
+	font-size: 34px;
+}
+
+#frame_incomplete_goals {
+	border: 3px solid rgba(200, 130, 255, 1);
+	border-radius: 10px;
+}
+
+#IncompleteGoals {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#IncompleteGoals #label_name {
+	color: white;
+	font-size: 14px;
+}
+
+#IncompleteGoals #label_goals {
+	color: #FFD640;
+	font-size: 24px;
+}
+
+#IncompleteGoals #scroll_area {
+	border: none;
+}
+
+#IncompleteGoals #widget_scroll {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#IncompleteGoals #progress_bar {
+	background-color: grey;
+	text-align: center;
+	border-radius: 3px;
+}
+
+#IncompleteGoals #progress_bar::chunk {
+	background-color: rgba(0, 240, 139, 1);
+	border-radius: 3px;
+}
+
+#frame_today {
+	border: 3px solid rgba(200, 130, 255, 1);
+	border-radius: 10px;
+}
+
+#TodayActivities #scroll_area_today {
+	border: none;
+}
+
+#TodayActivities #widget_scroll_today {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#TodayActivities #registry_container QLabel {
+	color: white;
+	font-size: 14px;
+}
+
+#TodayActivities #label_today {
+	color: #FFD640;
+	font-size: 24px;
+}
+
+
+#TodayActivities #label_header_skill {
+	color: white;
+	font-size: 14px;
+}
+
+#TodayActivities #label_header_goal {
+	color: white;
+	font-size: 14px;
+}
+
+#TodayActivities #label_header_dedicated {
+	color: white;
+	font-size: 14px;
+}
+
+#TodayActivities #label_header_time {
+	color: white;
+	font-size: 14px;
+}
+
+#frame_heatmap {
+	border: 3px solid rgba(200, 130, 255, 1);
+	border-radius: 10px;
+}
+
+#Heatmap #label_month {
+	color: #FFD640;
+	font-size: 24px;
+}
+
+
+#Heatmap #heatmap {
+	font-weight: 700;
+	font-size: 16px;
+	gridline-color: transparent;
+	font-family: "Roboto";
+	background-color: rgba(30, 30, 30, 1);
+	color: white;
+	border: none;
+}
+
+#Heatmap #heatmap::item:hover {}
+
+#Heatmap QHeaderView {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#Heatmap QHeaderView::section {
+	color: white;
+	border: none;
+	background-color: rgba(30, 30, 30, 1);
+	font-family: "Roboto";
+	font-size: 20px;
+	font-weight: bold;
+}

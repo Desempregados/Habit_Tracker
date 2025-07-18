@@ -1,5 +1,6 @@
 import sys
 import calendar
+from pathlib import Path
 from PyQt6.QtWidgets import (
     QApplication,
     QTableWidget,
@@ -33,9 +34,6 @@ class Heatmap(QTableWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setStyleSheet(
-            "background-color:rgb(50, 50, 50); color:white; font-weight:bold; font-size: 20px;"
-        )
         self.current_date = datetime.now()
         # ================================= Table ======================
 
@@ -54,6 +52,14 @@ class Heatmap(QTableWidget):
         # ================================== Initialize functions =============
 
         self.initCalendar(7)
+
+    # ====================== Load qss ==================================
+
+    def Load_qss(self):
+        STYLE_DIR = Path(__file__).resolve().parent / "style.qss"
+        with open(STYLE_DIR, "r", encoding="UTF-8") as f:
+            style_qss = f.read()
+            self.setStyleSheet(style_qss)
 
     # ======================================= Set the calendar days ===========
 

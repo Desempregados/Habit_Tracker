@@ -38,4 +38,5 @@ def db_custom_query() -> bool:
 
 
 if __name__ == "__main__":
+    print("sexo")
     pass

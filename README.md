@@ -5,13 +5,13 @@
 
 ### Roadmap:
 
-- [ ] Homepage
+- [x] Homepage ~~ Greeze
 	- [x] Mostrar goals incompletos ~~ Greeze
 	- [x] Heatmaps dos registros ~~ Greeze
 	- [x] Progresso do dia ~~ Greeze
-	- [ ] Botão para ir pra lista de skills
-	- [ ] Linkar com a tela principal
-	- [ ] Aplicar qss na homepage
+	- [x] Botão para ir pra lista de skills ~~ Greeze
+	- [x] Linkar com a tela principal ~~ Greeze
+	- [x] Aplicar qss na homepage ~~ Greeze
 
 - [ ] Organização do código
 	- [X]  dividir a database em arquivos baseado nos comments ~~ Art

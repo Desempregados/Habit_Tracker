@@ -26,11 +26,13 @@ class ContainerGoal(QWidget):
         # =============================== Label name =========================
 
         self.label_name = QLabel("Goal name")
+        self.label_name.setObjectName("label_name")
         self.layout_main.addWidget(self.label_name, 0, 0)
 
         # =============================== Progress bar =======================
 
         self.progress_bar = QProgressBar()
+        self.progress_bar.setObjectName("progress_bar")
         self.progress_bar.setRange(0, 100)
         self.progress_bar.setValue(10)
         self.layout_main.addWidget(self.progress_bar, 0, 1)
@@ -55,12 +57,12 @@ class IncompleteGoals(QWidget):
 
         super().__init__(parent)
         self.layout_main = QVBoxLayout(self)
-        self.setStyleSheet("background-color:rgb(130,130,130);")
         self.containers = []
 
         # ================================ Label Goals ========================
 
         self.label_goals = QLabel("Incomplete Goals")
+        self.label_goals.setObjectName("label_goals")
         self.layout_main.addWidget(
             self.label_goals,
             alignment=Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignTop,
@@ -69,8 +71,10 @@ class IncompleteGoals(QWidget):
         # ================================= Scroll Area ========================
 
         self.scroll_area = QScrollArea()
+        self.scroll_area.setObjectName("scroll_area")
         self.scroll_area.setWidgetResizable(True)
         self.widget_scroll = QWidget()
+        self.widget_scroll.setObjectName("widget_scroll")
         self.layout_scroll = QVBoxLayout()
         self.widget_scroll.setLayout(self.layout_scroll)
         self.scroll_area.setWidget(self.widget_scroll)

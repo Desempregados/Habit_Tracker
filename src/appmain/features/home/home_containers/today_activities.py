@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import (
     QVBoxLayout,
 )
 from PyQt6.QtCore import Qt
+from datetime import datetime
 from appmain.database.read import (
     db_read_registry_info,
     db_obtain_skill_by_id,
@@ -20,11 +21,14 @@ from appmain.database.read import (
 class RegistryContainer(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.valid = None
         self.layout_main = QHBoxLayout(self)
+        self.setObjectName("registry_container")
 
         # ======================== Label skill ====================
 
         self.label_skill = QLabel("skill name")
+        self.label_skill.setObjectName("label_skill_name")
         self.layout_main.addWidget(
             self.label_skill,
             alignment=Qt.AlignmentFlag.AlignCenter,
@@ -34,6 +38,7 @@ class RegistryContainer(QWidget):
         # ======================== Label goal =====================
 
         self.label_goal = QLabel("goal")
+        self.label_goal.setObjectName("label_goal")
         self.layout_main.addWidget(
             self.label_goal,
             alignment=Qt.AlignmentFlag.AlignCenter,
@@ -43,6 +48,7 @@ class RegistryContainer(QWidget):
         # ======================== Label dedicated time ===========
 
         self.label_dedicated = QLabel("00:00:00")
+        self.label_dedicated.setObjectName("label_dedicated")
         self.layout_main.addWidget(
             self.label_dedicated,
             alignment=Qt.AlignmentFlag.AlignCenter,
@@ -51,6 +57,7 @@ class RegistryContainer(QWidget):
         # ======================== Label time =====================
 
         self.label_time = QLabel("00:00:00")
+        self.label_time.setObjectName("label_time")
         self.layout_main.addWidget(
             self.label_time,
             alignment=Qt.AlignmentFlag.AlignCenter,
@@ -63,8 +70,10 @@ class RegistryContainer(QWidget):
         data = (db_read_registry_info(registry_id))[0]
         skill_id = data["skill_id"]
         goal_id = data["goal_id"]
-        registry_time = data["registry_time"][11:]
+        registry_time = data["registry_time"]
         dedicated_time = self.form_time(data["dedicated_time"])
+
+        form_registry_time = datetime.strptime(registry_time, "%Y-%m-%d %H:%M:%S")
 
         skill_name = db_obtain_skill_by_id(skill_id)
         if goal_id:
@@ -72,10 +81,14 @@ class RegistryContainer(QWidget):
         else:
             goal_name = "no goal"
 
-        self.label_skill.setText(skill_name)
-        self.label_goal.setText(goal_name)
-        self.label_time.setText(registry_time)
-        self.label_dedicated.setText(dedicated_time)
+        if form_registry_time.day == datetime.now().day:
+            self.label_skill.setText(skill_name)
+            self.label_goal.setText(goal_name)
+            self.label_time.setText(registry_time)
+            self.label_dedicated.setText(dedicated_time)
+            self.valid = True
+        else:
+            self.valid = False
 
     def form_time(self, s: int) -> str:
         return f"{int(s // 3600):02d}:{int((s // 60) % 60):02d}:{int(s % 60):02d}"
@@ -90,6 +103,7 @@ class TodayActivities(QWidget):
         # ======================== Label Today activities ========
 
         self.label_today = QLabel("Today Activities")
+        self.label_today.setObjectName("label_today")
         self.layout_main.addWidget(
             self.label_today, alignment=Qt.AlignmentFlag.AlignCenter, stretch=0
         )
@@ -97,9 +111,11 @@ class TodayActivities(QWidget):
         # ======================== Scroll area setup ==============
 
         self.scroll_area = QScrollArea()
+        self.scroll_area.setObjectName("scroll_area_today")
         self.scroll_area.setWidgetResizable(True)
 
         self.widget_scroll = QWidget()
+        self.widget_scroll.setObjectName("widget_scroll_today")
         self.layout_scroll = QGridLayout()
         self.widget_scroll.setLayout(self.layout_scroll)
         self.scroll_area.setWidget(self.widget_scroll)
@@ -108,6 +124,7 @@ class TodayActivities(QWidget):
         # ========================= Label skill ====================
 
         self.label_skill = QLabel("skill")
+        self.label_skill.setObjectName("label_header_skill")
         self.layout_scroll.addWidget(
             self.label_skill,
             0,
@@ -118,6 +135,7 @@ class TodayActivities(QWidget):
         # ========================= Label skill ====================
 
         self.label_goal = QLabel("goal")
+        self.label_goal.setObjectName("label_header_goal")
         self.layout_scroll.addWidget(
             self.label_goal,
             0,
@@ -128,6 +146,7 @@ class TodayActivities(QWidget):
         # ========================= Label skill ====================
 
         self.label_dedicated_time = QLabel("dedicated_time")
+        self.label_dedicated_time.setObjectName("label_header_dedicated")
         self.layout_scroll.addWidget(
             self.label_dedicated_time,
             0,
@@ -138,6 +157,7 @@ class TodayActivities(QWidget):
         # ========================= Label skill ====================
 
         self.label_time = QLabel("time")
+        self.label_time.setObjectName("label_header_time")
         self.layout_scroll.addWidget(
             self.label_time,
             0,
@@ -154,9 +174,10 @@ class TodayActivities(QWidget):
         for i in registries_id:
             container = RegistryContainer()
             container.setData(i)
-            self.layout_scroll.addWidget(container, r, 0, 1, 4)
-            self.containers.append(container)
-            r += 1
+            if container.valid:
+                self.layout_scroll.addWidget(container, r, 0, 1, 4)
+                self.containers.append(container)
+                r += 1
 
         self.layout_scroll.setRowStretch(r, 2)
 

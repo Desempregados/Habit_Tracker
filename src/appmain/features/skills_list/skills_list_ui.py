@@ -31,6 +31,11 @@ class SkillsListUI(QWidget):
         # main layout
         self.layout_principal = QVBoxLayout(self)
 
+        self.button_back = QPushButton("")
+        self.button_back.setObjectName("button_back")
+        self.layout_principal.addWidget(
+            self.button_back, alignment=Qt.AlignmentFlag.AlignLeft
+        )
         # QListWidget setup
         self.list_widget = QListWidget()
         self.list_widget.setObjectName("list_widget")
