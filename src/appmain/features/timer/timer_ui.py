@@ -1,142 +1,100 @@
 import sys
-from PyQt6.QtWidgets import (
-    QApplication,
-    QWidget,
-    QVBoxLayout,
-    QHBoxLayout,
-    QPushButton,
-    QSpinBox,
-)
+from pathlib import Path
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton
 from PyQt6.QtCore import QTimer
-
-from appmain.features.timer.timer_logic import TimerLogic
-
-
-class TimeSelectorWidget(QWidget):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        layout = QHBoxLayout()
-        layout.setContentsMargins(0, 0, 0, 0)
-        layout.addStretch(1)
-
-        self.hours = QSpinBox()
-        self.hours.setRange(0, 23)
-        self.hours.setSuffix(" h")
-        self.hours.setFixedWidth(70)
-
-        self.minutes = QSpinBox()
-        self.minutes.setRange(0, 59)
-        self.minutes.setSuffix(" m")
-        self.minutes.setFixedWidth(70)
-
-        self.seconds = QSpinBox()
-        self.seconds.setRange(0, 59)
-        self.seconds.setSuffix(" s")
-        self.seconds.setFixedWidth(70)
-
-        layout.addWidget(self.hours)
-        layout.addWidget(self.minutes)
-        layout.addWidget(self.seconds)
-        self.setLayout(layout)
-        layout.addStretch(1)
-
-    def get_total_seconds(self):
-        return (
-            self.hours.value() * 3600 + self.minutes.value() * 60 + self.seconds.value()
-        )
-
-    def set_time_in_seconds(self, total_seconds):
-        h = total_seconds // 3600
-        m = (total_seconds % 3600) // 60
-        s = total_seconds % 60
-        self.hours.setValue(h)
-        self.minutes.setValue(m)
-        self.seconds.setValue(s)
-
-    def setEnabled(self, enabled):
-        self.hours.setEnabled(enabled)
-        self.minutes.setEnabled(enabled)
-        self.seconds.setEnabled(enabled)
+from timer_dialog import TemporizadorDialog as SeletorDeTempoWidget
 
 
-class TimerUI(QWidget):
+class TemporizadorApp(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Timer")
+
+        self.setObjectName("NewGoalDialog")
+        self.setWindowTitle('Temporizador Estilo Safira 2.0')
         self.setGeometry(100, 100, 350, 150)
 
-        self.logic = TimerLogic()
+        self.tempo_restante_segundos = 0
+        self.timer_rodando = False
+
         self.timer = QTimer(self)
         self.timer.setInterval(1000)
-        self.timer.timeout.connect(self.update_countdown)
+        self.timer.timeout.connect(self.atualizar_contagem)
 
-        self.init_ui()
+        self.inicializar_ui()
+        self.Load_qss()
 
-    def init_ui(self):
+    def Load_qss(self):
+        STYLE_DIR = Path(__file__).resolve().parent / "style_goals.qss"
+        with open(STYLE_DIR, "r", encoding="UTF-8") as f:
+            self.setStyleSheet(f.read())
+
+    def inicializar_ui(self):
         main_layout = QVBoxLayout()
-        self.time_selector = TimeSelectorWidget()
+
+        self.seletor_tempo = SeletorDeTempoWidget()
+
         button_layout = QHBoxLayout()
 
-        self.start_button = QPushButton("Start")
-        self.start_button.clicked.connect(self.start_timer)
-        button_layout.addWidget(self.start_button)
+        self.start_button = QPushButton("Iniciar")
+        self.start_button.setObjectName("button_confirm")
+        self.start_button.clicked.connect(self.iniciar_timer)
 
-        self.pause_button = QPushButton("Pause")
-        self.pause_button.clicked.connect(self.pause_timer)
+        self.pause_button = QPushButton("Pausar")
+        self.pause_button.setObjectName("button_cancel")
+        self.pause_button.clicked.connect(self.pausar_timer)
         self.pause_button.setEnabled(False)
-        button_layout.addWidget(self.pause_button)
 
-        self.reset_button = QPushButton("Reset")
-        self.reset_button.clicked.connect(self.reset_timer)
+        self.reset_button = QPushButton("Resetar")
+        self.reset_button.setObjectName("button_cancel")
+        self.reset_button.clicked.connect(self.resetar_timer)
+
+        button_layout.addWidget(self.start_button)
+        button_layout.addWidget(self.pause_button)
         button_layout.addWidget(self.reset_button)
 
-        main_layout.addWidget(self.time_selector)
+        main_layout.addWidget(self.seletor_tempo)
         main_layout.addLayout(button_layout)
+
         self.setLayout(main_layout)
 
-    def start_timer(self):
-        total_seconds = self.time_selector.get_total_seconds()
-        if self.logic.start(total_seconds):
+    def iniciar_timer(self):
+        self.tempo_restante_segundos = self.seletor_tempo.get_total_segundos()
+
+        if self.tempo_restante_segundos > 0:
+            self.timer_rodando = True
             self.start_button.setEnabled(False)
             self.pause_button.setEnabled(True)
-            self.pause_button.setText("Pause")
-            self.time_selector.setEnabled(False)
+            self.pause_button.setText("Pausar")
+            self.seletor_tempo.setEnabled(False)
             self.timer.start()
 
-    def pause_timer(self):
-        if self.logic.timer_running:
-            self.logic.pause()
+    def pausar_timer(self):
+        if self.timer_rodando:
             self.timer.stop()
-            self.pause_button.setText("Resume")
+            self.timer_rodando = False
+            self.pause_button.setText("Retomar")
         else:
-            self.logic.resume()
             self.timer.start()
-            self.pause_button.setText("Pause")
+            self.timer_rodando = True
+            self.pause_button.setText("Pausar")
 
-    def reset_timer(self):
+    def resetar_timer(self):
         self.timer.stop()
-        self.logic.reset()
-        self.time_selector.set_time_in_seconds(0)
+        self.timer_rodando = False
+        self.tempo_restante_segundos = 0
+
+        self.seletor_tempo.set_tempo_em_segundos(0)
+
         self.start_button.setEnabled(True)
         self.pause_button.setEnabled(False)
-        self.pause_button.setText("Pause")
-        self.time_selector.setEnabled(True)
+        self.pause_button.setText("Pausar")
+        self.seletor_tempo.setEnabled(True)
 
-    def update_countdown(self):
-        finished = self.logic.tick()
-        self.time_selector.set_time_in_seconds(self.logic.remaining_time_seconds)
-        if finished:
+    def atualizar_contagem(self):
+        if self.tempo_restante_segundos > 0:
+            self.tempo_restante_segundos -= 1
+            self.seletor_tempo.set_tempo_em_segundos(self.tempo_restante_segundos)
+        else:
             self.timer.stop()
-            self.reset_timer()
-            print("Time's up!")
-
-
-def main():
-    app = QApplication(sys.argv)
-    window = TimerUI()
-    window.show()
-    sys.exit(app.exec())
-
-
-if __name__ == "__main__":
-    main()
+            self.resetar_timer()
+            print("O tempo acabou!")

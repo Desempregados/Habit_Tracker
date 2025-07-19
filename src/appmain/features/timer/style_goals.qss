@@ -1,0 +1,199 @@
+#ContainerGoal {
+	background-color: rgba(30, 30, 30, 1);
+	border: 10px solid white;
+	font-family: "Outfit", "JetBrainsMono Nerd Font";
+}
+
+#ContainerGoal QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#ContainerGoal QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
+}
+
+#ContainerGoal QLabel#label_skill_type {
+	font-size: 100px;
+	padding-right: 20px;
+	color: rgb(0, 255, 139);
+}
+
+#ContainerGoal QLabel#label_goal_name {
+	font-size: 30px;
+	color: white;
+}
+
+#ContainerGoal QLabel#label_progress {
+	font-size: 20px;
+	color: silver;
+}
+
+#ContainerGoal QPushButton {
+	font-size: 20px;
+	padding: 5px;
+	color: rgba(0, 255, 139, 0.8);
+	background-color: transparent;
+	border: none;
+}
+
+#ContainerGoal QPushButton:hover {
+	color: rgba(0, 255, 139, 1);
+}
+
+#ContainerGoal QPushButton:pressed {
+	color: rgba(0, 255, 139, 0.6);
+}
+
+#ContainerGoal QProgressBar {
+	border-radius: 10px;
+	background-color: grey;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#ContainerGoal QProgressBar::chunk {
+	border-radius: 10px;
+	background-color: rgba(200, 130, 255, 1);
+}
+
+#GoalsUI {
+	background-color: rgba(30, 30, 30, 1);
+	font-family: "Outfit", "JetBrainsMono Nerd Font";
+}
+
+#GoalsUI QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#GoalsUI QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
+}
+
+#GoalsUI QPushButton#button_back {
+	font-size: 40px;
+	color: rgba(0, 255, 139, 0.8);
+	background-color: transparent;
+	border: none;
+	padding-right: 5px;
+}
+
+#GoalsUI QPushButton#button_back:hover {
+	color: rgba(0, 255, 139, 1);
+}
+
+#GoalsUI QPushButton#button_back:pressed {
+	color: rgba(0, 255, 139, 0.6);
+}
+
+#GoalsUI QLabel#label_skill_name {
+	font-size: 30px;
+	color: white;
+}
+
+#GoalsUI QLabel#label_total_time {
+	font-size: 40px;
+	color: rgba(200, 130, 255, 1);
+}
+
+#GoalsUI QScrollArea {
+	border: none;
+}
+
+#GoalsUI QWidget#widget_scroll_area {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#GoalsUI QPushButton#button_add_goal {
+	font-size: 40px;
+	color: rgba(0, 255, 139, 0.8);
+	background-color: transparent;
+	border: none;
+	padding-right: 10px;
+}
+
+#GoalsUI QPushButton#button_add_goal:hover {
+	color: rgba(0, 255, 139, 1);
+}
+
+#GoalsUI QPushButton#button_add_goal:pressed {
+	color: rgba(0, 255, 139, 0.6);
+}
+
+#NewGoalDialog {
+	background-color: rgba(30, 30, 30, 1);
+}
+
+#NewGoalDialog QPushButton {
+	font-family: "Ubuntu Nerd Font"
+}
+
+#NewGoalDialog QLabel {
+	font-family: "Roboto";
+	font-weight: 700;
+	font-size: 34px;
+	color: white;
+	margin: 0px;
+}
+
+#NewGoalDialog QWidget[class="CustomSpinBox"] QPushButton {
+	background-color: transparent;
+	padding: 0px;
+	border: none;
+	color: white;
+	font-size: 14px;
+	margin: 0px;
+}
+
+#NewGoalDialog QWidget[class="CustomSpinBox"] QSpinBox {
+	background-color: transparent;
+	padding: 0px;
+	border: none;
+	margin: 0px;
+	qproperty-alignment: 'AlignCenter';
+	color: white;
+	font-size: 34px;
+}
+
+#NewGoalDialog QLineEdit {
+	background-color: transparent;
+	border: 1px solid rgb(70, 70, 70);
+	border-radius: 10px;
+	font-weight: 600;
+	font-family: 'Roboto';
+	font-size: 20px;
+	color: white;
+	qproperty-alignment: 'AlignCenter';
+}
+
+#NewGoalDialog QLineEdit:hover {
+	border: 1px solid rgba(200, 130, 255, 1);
+	border-radius: 10px;
+}
+
+#NewGoalDialog QPushButton {
+	font-family: 'Ubuntu Nerd Font';
+	background-color: transparent;
+	border: none;
+	font-size: 20px;
+	color: white;
+}
+
+#NewGoalDialog QPushButton#button_confirm:hover {
+	color: rgba(0, 255, 139, 0.8);
+}
+
+#NewGoalDialog QPushButton#button_confirm:pressed {
+	color: rgba(0, 255, 139, 1);
+}
+
+#NewGoalDialog QPushButton#button_cancel:hover {
+	color: rgba(200, 130, 255, 0.8);
+}
+
+#NewGoalDialog QPushButton#button_cancel:pressed {
+	color: rgba(200, 130, 255, 1);
+}
