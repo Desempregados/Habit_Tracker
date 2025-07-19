@@ -24,10 +24,10 @@
 	- [ ] Tela de criação de goals mais detalhada
 
 - [ ] Timer
-	- [ ] Logica do timer ~~ Art
-	- [ ] Interface do timer ~~ Art
-	- [ ]  reutilizar o qss das metas no timer ~~ Art
-	- [ ]  Linkar timer no app principal
+	- [x] Logica do timer ~~ Art
+	- [x] Interface do timer ~~ Art
+	- [x]  reutilizar o qss das metas no timer ~~ Art
+	- [ ]  Linkar timer no app principal ~~ Art
 
 - [x] Qss
 	- [X]  Adicionar qss em todas as caixas de dialogo ~~ Greeze
