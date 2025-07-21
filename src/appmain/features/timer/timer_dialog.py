@@ -1,6 +1,6 @@
 from PyQt6.QtCore import QTimer
 from PyQt6.QtWidgets import (
-    QDialog,
+    QWidget,
     QLabel,
     QVBoxLayout,
     QPushButton,
@@ -10,7 +10,7 @@ from pathlib import Path
 from src.appmain.common.spinbox_custom import CustomSpinBoxWidget  # seu componente customizado
 
 
-class TemporizadorDialog(QDialog):
+class TimerWindow(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setObjectName("NewGoalDialog")
