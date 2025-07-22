@@ -64,8 +64,6 @@ class RegistryContainer(QWidget):
             stretch=1,
         )
 
-        self.setData(3)
-
     def setData(self, registry_id: int):
         data = (db_read_registry_info(registry_id))[0]
         skill_id = data["skill_id"]

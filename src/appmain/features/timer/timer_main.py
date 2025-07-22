@@ -1,13 +1,12 @@
 from PyQt6.QtWidgets import QApplication
 import sys
 
-from src.appmain.features.timer.timer_dialog import TimerWindow
-
+from appmain.features.timer.timer_dialog import TemporizadorDialog
 
 
 def main():
     app = QApplication(sys.argv)
-    window = TimerWindow()
+    window = TemporizadorDialog()
     window.show()
     sys.exit(app.exec())
 

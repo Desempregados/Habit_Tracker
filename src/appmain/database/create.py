@@ -173,3 +173,5 @@ def db_create_goal(
 
 if __name__ == "__main__":
     db_create()
+    db_create_skill("skill")
+    db_add_registry(1, 10)

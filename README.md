@@ -32,6 +32,10 @@
 - [x] Qss
 	- [X]  Adicionar qss em todas as caixas de dialogo ~~ Greeze
 
+- [ ] Debug
+    - [ ] Fazer a homepage atualizar
+    - [ ] Corrigir o bug de quando nao tem registros
+    - [ ] Deixar escrever na criação de goals
 
 ### Partes completas
 - [x] Homepage ~~ Greeze

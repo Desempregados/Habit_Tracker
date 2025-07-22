@@ -1,0 +1,18 @@
+#CreationMain QLabel {
+	font-family: "Roboto";
+	font-weight: 600;
+}
+
+#CreationMain QPushButton {
+	font-family: "Ubuntu Nerd Font";
+}
+
+#CreationMain {
+	background-color: rgb(30, 30, 30);
+}
+
+#CreationMain #label_name {
+	font-size: 50px;
+	color: white;
+
+}

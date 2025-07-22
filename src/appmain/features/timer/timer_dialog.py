@@ -7,7 +7,9 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
 )
 from pathlib import Path
-from src.appmain.common.spinbox_custom import CustomSpinBoxWidget  # seu componente customizado
+from appmain.common.spinbox_custom import (
+    CustomSpinBoxWidget,
+)  # seu componente customizado
 
 
 class TimerWindow(QWidget):
@@ -18,10 +20,8 @@ class TimerWindow(QWidget):
         self.value = 0
         self.timer_running = False
 
-
-        
         # ================= Qtimer init ====================
-        
+
         self.timer = QTimer(self)
         self.timer.setInterval(1000)
         self.timer.timeout.connect(self.atualizar_contagem)
@@ -88,7 +88,7 @@ class TimerWindow(QWidget):
         m = self.spin_box_minutes.spin_box.value()
         s = self.spin_box_seconds.spin_box.value()
         return h * 3600 + m * 60 + s
-        
+
     def set_time_in_seconds(self, total):
         h = total // 3600
         m = (total % 3600) // 60
@@ -97,7 +97,6 @@ class TimerWindow(QWidget):
         self.spin_box_minutes.spin_box.setValue(m)
         self.spin_box_seconds.spin_box.setValue(s)
 
-    
     def iniciar_timer(self):
         self.value = self.get_total_segundos()
         if self.value > 0:
@@ -107,7 +106,6 @@ class TimerWindow(QWidget):
             self.button_pause.setEnabled(True)
             self.button_pause.setText("Pausar")
             self.timer.start()
-        
 
     def atualizar_contagem(self):
         self.tempo_restante_segundos = self.get_total_segundos()
@@ -118,7 +116,6 @@ class TimerWindow(QWidget):
             self.timer.stop()
             self.reset_timer()
             print("Time's up")
-
 
     def pause_timer(self):
         if self.timer_running:
@@ -139,5 +136,3 @@ class TimerWindow(QWidget):
         self.button_start.setEnabled(True)
         self.button_pause.setEnabled(False)
         self.button_pause.setText("Pausar")
-
-
